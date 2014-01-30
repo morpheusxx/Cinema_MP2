@@ -1,0 +1,63 @@
+﻿<Plugin
+  DescriptorVersion="1.0"
+  Name="Cinema"
+  PluginId="{6C74404D-5D4E-4774-A368-01911886B7EC}"
+  Author="BigGranu"
+  Copyright="GPL"
+  Description="Cinemaprogramm, Trailer, Infos"
+  PluginVersion="1.0">
+
+  <Runtime>
+    <Assembly FileName="Cinema.dll"/>
+  </Runtime>
+
+  <DependsOn>
+    <PluginReference PluginId="{5D239050-02B8-4f58-8301-7630A1C4CF85}"/>  SkinBase 
+    <PluginReference PluginId="{1AFF4467-64B0-4ca1-AF28-9AEDF3525BCE}"/>  ConfigurationManager 
+    <PluginReference PluginId="{B765A4B6-F455-4941-BDAE-2CE45208BFEB}"/>  Configuration plugin 
+  </DependsOn>
+
+  <Register Location="/Models">
+    <Model Id="78E0D999-D87A-4340-B8D1-9CF97814D2FD" ClassName="Cinema.Models.CinemaHome"/>
+    <Model Id="23A02262-A337-4836-AAF5-E70DAD6AFDCC" ClassName="Cinema.Models.CinemaSettings"/>
+  </Register>
+
+  <Register Location="/Workflow/States">
+    <WorkflowState Id="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+      Name="Home" MainScreen="CinemaHome"
+      DisplayLabel="[Cinema.Title]"
+      WorkflowModel="78E0D999-D87A-4340-B8D1-9CF97814D2FD"/>
+
+    <WorkflowState Id="00A57210-DE65-4E22-A477-CD0D5BAEFDF9"
+      Name="Settings" MainScreen="CinemaSettings"
+      DisplayLabel="[Cinema.Settings]"
+      WorkflowModel="23A02262-A337-4836-AAF5-E70DAD6AFDCC"/>
+  </Register>
+
+  <Register Location="/Resources/Skin">
+    <Resource Id="CinemaSkin" Directory="Skin" Type="Skin"/>
+  </Register>
+  
+  <Register Location="/Resources/Language">
+    <Resource Id="CinemaLanguge" Directory="Language" Type="Language"/>
+  </Register>
+
+   <!--Content of Settings/Plugins section--> 
+  <Register Location="/Configuration/Settings/Plugins">
+    <ConfigSection
+        Id="Cinema"
+        Redundant="true"
+        Text="Cinema"/>
+  </Register>
+
+   <!--Content of Settings/Plugins/Cinema section--> 
+  <Register Location="/Configuration/Settings/Plugins/Cinema">
+    <CustomConfigSetting
+      Id="Cinema_Settings"
+      Text="[Cinema.Location.Settings.ScreenTitle]"
+      HelpText="[Cinema.Location.Settings.Helptext]"
+      ClassName="Cinema.Settings.Configuration.Locations"
+			AdditionalData="WorkflowState=00A57210-DE65-4E22-A477-CD0D5BAEFDF9,ConfAppPanel=..."/>
+  </Register>
+  
+</Plugin>

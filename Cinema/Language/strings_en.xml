@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <string name="Cinema.Title">Cinema</string>
+  
+  <string name="Cinema.Location.Settings.ScreenTitle">Locations</string>
+  <string name="Cinema.Location.Settings.Helptext">Put the Locations of your Cinemas</string>
+  <string name="Cinema.Location.Settings.Search">Search</string>
+  <string name="Cinema.Settings">Settings</string>
+</resources>

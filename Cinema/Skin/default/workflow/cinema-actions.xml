@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Workflow DescriptorVersion="1.0">
+  
+  <MenuActions>
+    <!-- Entrys in Homemenu -->
+    <PushNavigationTransition Id="BD93C5B3-402C-40A2-B323-DA891ED5F50E"
+			Name="Home->Cinema"
+			DisplayCategory="z-Cinema"
+			SortOrder="a"
+			SourceStates="7F702D9C-F2DD-42da-9ED8-0BA92F07787F"
+			TargetState="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+			DisplayTitle="[Cinema.Title]"/>
+
+    <!--<PushNavigationTransition Id="7EC9FD5E-C1B6-4E35-A1DC-28132BE4109C"
+      Name="Home->Cinema"
+      DisplayCategory="z-Cinema"
+      SortOrder="a"
+      SourceStates="F5CC0E2E-86F9-42A2-B531-4311D42C0634"
+      TargetState="00A57210-DE65-4E22-A477-CD0D5BAEFDF9"
+      DisplayTitle="[Cinema.MenuEntry]"/>-->
+    
+  </MenuActions>
+</Workflow>
