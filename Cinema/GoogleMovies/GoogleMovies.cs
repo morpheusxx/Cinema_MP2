@@ -185,14 +185,12 @@ namespace Cinema.GoogleMovies
         // Title
         var n = GetSubstring(b[x], "_theater_", ">", "</");
         // Address
-        var a = GetSubstring(b[x], "info>", " -");
+        var a = GetSubstring(b[x], "info>", "<");
         // Ort
         var near = GetSubstring(b[x], "near=", "&tid=");
-        // Phone
-        var p = GetSubstring(b[x], "info>", "- ", "<");
         // Neue Kinos eintragen
         if (i == "") continue;
-        var cinema = new Cinema { Id = i, Name = n, Address = a, Near = near, Phone = p };
+        var cinema = new Cinema { Id = i, Name = n, Address = a, Near = near};
         cl.Add(cinema);
       }
       return cl;
@@ -303,7 +301,6 @@ namespace Cinema.GoogleMovies
     public string Id;
     public string Name;
     public string Near;
-    public string Phone;
   }
 
   public struct Movie

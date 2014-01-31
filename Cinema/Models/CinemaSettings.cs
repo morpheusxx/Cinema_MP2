@@ -77,22 +77,26 @@ namespace Cinema.Models
         _selectedCinemas = _lSettings.LocationSetupList;
       }
       Cinemas.Clear();
+      AddSelectedCinemasToAllCinemas();
+      AddAllCinemas();
+      Cinemas.FireChange();
+    }
 
+    private void AddSelectedCinemasToAllCinemas()
+    {
       _allCinemas = new List<GoogleMovies.Cinema>();
       foreach (var c in _selectedCinemas)
       {
         _allCinemas.Add(c);
       }
-
-      AddAllCinemas();
-      Cinemas.FireChange();
     }
 
     public void ReadCinemas()
     {
       Cinemas.Clear();
+      AddSelectedCinemasToAllCinemas();
 
-      foreach (var c in GoogleMovies.GoogleMovies.GetCinemas(Location).Where(c => IsCinemaNew(c)))
+      foreach (var c in GoogleMovies.GoogleMovies.GetCinemas(Location).Where(IsCinemaNew))
       {
         _allCinemas.Add(c);
       }

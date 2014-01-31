@@ -24,9 +24,9 @@
             <ColumnDefinition Width="20*"  />
           </Grid.ColumnDefinitions>
           
-          <TextBox Grid.Column="0" Grid.Row="0" Margin="10,2,10,2" Height="50" Text="{Binding Path=Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBox Grid.Column="0" Grid.Row="0" Margin="15,2,15,2" Height="50" Text="{Binding Path=Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
           
-          <Button Grid.Column="1" Grid.Row="0" Content="[Cinema.Location.Settings.Search]" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="10,0,10,0" Command="{Command ReadCinemas}"/>
+          <Button Grid.Column="1" Grid.Row="0" Margin="15,2,15,2" Content="[Cinema.Location.Settings.Search]" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Command ReadCinemas}"/>
 
           <ListView x:Name="Cinemas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource CinemaSelectListViewStyle}"
             ItemsSource="{Binding Path=Cinemas, Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
