@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowWrapper">
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\DirectShowWrapper.dll</HintPath>
+    </Reference>
     <Reference Include="Media">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\Media\Media.dll</HintPath>
     </Reference>
@@ -41,6 +44,9 @@
     <Reference Include="MediaPortal.UI">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.UI.dll</HintPath>
     </Reference>
+    <Reference Include="SkinEngine">
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\SkinEngine\SkinEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -49,11 +55,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="VideoPlayers">
+      <HintPath>..\..\..\MediaPortal-2-master\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GoogleMovies\GoogleMovies.cs" />
+    <Compile Include="Helper\Trailer.cs" />
     <Compile Include="Models\CinemaHome.cs" />
     <Compile Include="Models\CinemaSettings.cs" />
+    <Compile Include="Player\CinemaPlayer.cs" />
+    <Compile Include="Player\CinemaPlayerHelper.cs" />
+    <Compile Include="Player\CinemaUIContributor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Configuration\Locations.cs" />
     <Compile Include="Settings\LocationSettings.cs" />

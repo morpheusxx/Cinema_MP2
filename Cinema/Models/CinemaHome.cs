@@ -26,9 +26,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinema.GoogleMovies;
+using Cinema.Helper;
+using Cinema.Player;
+using MediaPortal.Common;
+using MediaPortal.Common.MediaManagement;
+using MediaPortal.Common.MediaManagement.DefaultItemAspects;
+using MediaPortal.Common.SystemResolver;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
+using MediaPortal.UI.Presentation.Players;
 using MediaPortal.UI.Presentation.Workflow;
+using MediaPortal.UiComponents.Media.Models;
 
 namespace Cinema.Models
 {
@@ -103,6 +111,13 @@ namespace Cinema.Models
     {
       var st = GoogleMovies.GoogleMovies.GetShowTimesByCinemaAndMovieAndDay(cinema, movie, day).Aggregate("", (current, s) => current + (s + " | "));
       return GoogleMovies.GoogleMovies.GetNewDay(day) + ": " + st;
+    }
+
+    public void Test()
+    {
+      var t = new Trailer { Title = "Dummy", Url = "http://de.clip-1.filmtrailer.com/12986_49410_a_3.mp4?log_var=72|49111147-1|-" };
+     Player.CinemaPlayerHelper.PlayStream(t);
+
     }
 
     #region IWorkflowModel implementation

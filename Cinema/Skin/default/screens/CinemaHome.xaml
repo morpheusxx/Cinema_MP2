@@ -43,6 +43,7 @@
           
           --><!--Poster and Trailerlink--><!--
           <Image x:Name="Poster" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Source="C:\Users\dierk_000\Downloads\Download.jpg"/>-->
+          <Button Grid.Column="1" Grid.Row="1" Margin="15,2,15,2" Content="test" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Command Test}"/>
           
           <!--List of Movies-->
           <ListView x:Name="Movies" Margin="15,5,15,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource ContentsMenuListViewStyle}"
