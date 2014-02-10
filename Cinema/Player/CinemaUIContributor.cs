@@ -29,8 +29,8 @@ namespace Cinema.Player
 {
   public class CinemaUiContributor : BaseVideoPlayerUIContributor
   {
-    public const string SCREEN_FULLSCREEN_VIDEO = "cinema_FullscreenContent";
-    public const string SCREEN_CURRENTLY_PLAYING_VIDEO = "cinema_CurrentlyPlaying";
+    public const string SCREEN_FULLSCREEN_VIDEO = "CinemaFullscreenContent";
+    public const string SCREEN_CURRENTLY_PLAYING_VIDEO = "CinemaCurrentlyPlaying";
 
     public override bool BackgroundDisabled
     {
@@ -49,5 +49,4 @@ namespace Cinema.Player
       }
     }
   }
-
 }

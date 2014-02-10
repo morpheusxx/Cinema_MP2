@@ -34,5 +34,11 @@ namespace Cinema.Helper
       Url = string.Empty;
       Title = string.Empty;
     }
+
+    public Trailer(string url, string title)
+    {
+      Url = url;
+      Title = title;
+    }
   }
 }

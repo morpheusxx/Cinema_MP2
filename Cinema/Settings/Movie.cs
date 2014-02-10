@@ -22,15 +22,28 @@
 
 #endregion
 
-using MediaPortal.Common.Configuration.ConfigurationClasses;
+using System.Collections.Generic;
+using Cinema.Helper;
+using MediaPortal.Common.Settings;
 
-namespace Cinema.Settings.Configuration
+namespace Cinema.Settings
 {
-  public class Locations : CustomConfigSetting 
+  internal class Movies
   {
-  }
+    public Movies()
+    {
+      MovieList = new List<GrappedMovie>();
+    }
 
-  public class ContentLanguage : CustomConfigSetting
-  {
+    public Movies(List<GrappedMovie> list)
+    {
+      MovieList = list;
+    }
+
+    /// <summary>
+    /// List of all Locations
+    /// </summary>
+    [Setting(SettingScope.User, null)]
+    public List<GrappedMovie> MovieList { get; set; }
   }
 }

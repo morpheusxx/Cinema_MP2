@@ -22,15 +22,29 @@
 
 #endregion
 
-using MediaPortal.Common.Configuration.ConfigurationClasses;
+using MediaPortal.Common.Settings;
 
-namespace Cinema.Settings.Configuration
+namespace Cinema.Settings
 {
-  public class Locations : CustomConfigSetting 
+  internal class CinemaSettings
   {
-  }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public CinemaSettings()
+    {
+    }
 
-  public class ContentLanguage : CustomConfigSetting
-  {
+    /// <summary>
+    /// Selected ContentLanguage
+    /// </summary>
+    [Setting(SettingScope.User, "de")]
+    public string ContentLanguage { get; set; }
+
+    /// <summary>
+    /// Date of Datalist
+    /// </summary>
+    [Setting(SettingScope.User, "07.02.2014")]
+    public string LastUpdate { get; set; }
   }
 }

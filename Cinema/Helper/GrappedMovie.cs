@@ -22,15 +22,31 @@
 
 #endregion
 
-using MediaPortal.Common.Configuration.ConfigurationClasses;
-
-namespace Cinema.Settings.Configuration
+namespace Cinema.Helper
 {
-  public class Locations : CustomConfigSetting 
+  public class GrappedMovie
   {
-  }
+    public string ImdbID;
+    public string Title;
+    public string Poster;
+    public string Picture;
+    public string Description;
+    public string Year;
+    public string AgeLimit;
+    public string Genre;
+    public string Trailer;
 
-  public class ContentLanguage : CustomConfigSetting
-  {
+    public GrappedMovie()
+    {
+      ImdbID = string.Empty;
+      Title = string.Empty;
+      Poster = string.Empty;
+      Picture = string.Empty;
+      Description = string.Empty;
+      Year = string.Empty;
+      AgeLimit = string.Empty;
+      Genre = string.Empty;
+      Trailer = string.Empty;
+    }
   }
 }

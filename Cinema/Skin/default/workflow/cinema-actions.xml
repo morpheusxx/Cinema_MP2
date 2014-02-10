@@ -12,13 +12,49 @@
 			TargetState="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
 			DisplayTitle="[Cinema.Title]"/>
 
-    <!--<PushNavigationTransition Id="7EC9FD5E-C1B6-4E35-A1DC-28132BE4109C"
-      Name="Home->Cinema"
+    <!--Select Cinema-->
+    <PushNavigationTransition Id="FC9A71D6-752C-43CF-9DB7-7F002385D06A"
+      Name="Cinema->SelectCinema"
       DisplayCategory="z-Cinema"
       SortOrder="a"
-      SourceStates="F5CC0E2E-86F9-42A2-B531-4311D42C0634"
-      TargetState="00A57210-DE65-4E22-A477-CD0D5BAEFDF9"
-      DisplayTitle="[Cinema.MenuEntry]"/>-->
+      SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+      TargetState="6BE954F1-9ED7-4570-B565-1D7F7ADD1FAE"
+      DisplayTitle="[Cinema.SelectCinema]"/>
+
+    <!--Manual Update-->
+    <MethodCallAction Id="CE2B51AE-374C-4EA1-987E-2BB3912E5E07"
+      Name="Update"
+      DisplayCategory="z-Cinema"
+      DisplayTitle="[Cinema.LoadUpdate.Manually]"
+      SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+      ModelId="78E0D999-D87A-4340-B8D1-9CF97814D2FD"
+      MethodName="MakeUpdate"/>   
     
+    <!--ComingSoon-->
+    <PushNavigationTransition Id="18CCCE93-2C01-4587-80E7-F2329C694B03"
+      Name="Cinema->CinemaInformations"
+      DisplayCategory="z-Cinema"
+      SortOrder="a"
+      SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+      TargetState="BF53FB1C-C846-48F2-BF1B-B848B7144102"
+      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoon]"/>
+    
+    <!--Coming Soon Cinema-->
+    <MethodCallAction Id="42A4A26C-ABD1-4186-A687-07FE81F96BE7"
+      Name="ComingSoonCinma"
+      DisplayCategory="z-Cinema"
+      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoonCinema]"
+      SourceStates="BF53FB1C-C846-48F2-BF1B-B848B7144102"
+      ModelId="D4DC262C-0437-4832-8524-6847FE0AA8F3"
+      MethodName="ComingSoonCinema"/>
+
+    <!--Coming Soon a-->
+    <MethodCallAction Id="426FE0A3-77C2-4013-857A-43534C1CF700"
+      Name="ComingSoonBluRay"
+      DisplayCategory="z-Cinema"
+      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoonBluRay]"
+      SourceStates="BF53FB1C-C846-48F2-BF1B-B848B7144102"
+      ModelId="D4DC262C-0437-4832-8524-6847FE0AA8F3"
+      MethodName="ComingSoonBlyRay"/>
   </MenuActions>
 </Workflow>

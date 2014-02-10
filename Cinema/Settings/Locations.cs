@@ -22,15 +22,42 @@
 
 #endregion
 
-using MediaPortal.Common.Configuration.ConfigurationClasses;
+using System.Collections.Generic;
+using MediaPortal.Common.Settings;
 
-namespace Cinema.Settings.Configuration
+namespace Cinema.Settings
 {
-  public class Locations : CustomConfigSetting 
+  /// <summary>
+  /// Location Settings Class
+  /// </summary>
+  internal class Locations
   {
-  }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Locations()
+    {
+      LocationSetupList = new List<GoogleMovies.Cinema>();
+    }
 
-  public class ContentLanguage : CustomConfigSetting
-  {
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Locations(List<GoogleMovies.Cinema> list)
+    {
+      LocationSetupList = list;
+    }
+
+    /// <summary>
+    /// List of all Locations
+    /// </summary>
+    [Setting(SettingScope.User, null)]
+    public List<GoogleMovies.Cinema> LocationSetupList { get; set; }
+
+    /// <summary>
+    /// Locations changed
+    /// </summary>
+    [Setting(SettingScope.User, true)]
+    public bool Changed { get; set; }
   }
 }

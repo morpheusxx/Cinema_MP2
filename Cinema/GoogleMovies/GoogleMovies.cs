@@ -1,4 +1,28 @@
-﻿using System;
+﻿#region Copyright (C) 2007-2013 Team MediaPortal
+
+/*
+    Copyright (C) 2007-2013 Team MediaPortal
+    http://www.team-mediaportal.com
+
+    This file is part of MediaPortal 2
+
+    MediaPortal 2 is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    MediaPortal 2 is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MediaPortal 2. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,34 +37,16 @@ namespace Cinema.GoogleMovies
 {
   internal class GoogleMovies
   {
-    #region "All Data"
+    #region All Data
 
     public static CinemaDataList DataList;
-    private static LocationSettings _lSettings = new LocationSettings();
-
-    public static void FillDataList()
-    {
-      var settingsManager = ServiceRegistration.Get<ISettingsManager>();
-      _lSettings = settingsManager.Load<LocationSettings>();
-
-      var dl = new CinemaDataList { Datalist = new List<CinemaData>() };
-
-      if (_lSettings.LocationSetupList != null)
-      {
-        var cl = _lSettings.LocationSetupList;
-        foreach (var c in cl)
-        {
-          dl.Datalist.Add(GetCinemaData(c));
-        }
-      }
-      DataList = dl;
-    }
+    private static Locations _lSettings = new Locations();
 
     #endregion
 
-    #region "Get Movies"
+    #region Get Movies
 
-    private static CinemaData GetCinemaData(Cinema cinema)
+    public static CinemaData GetCinemaData(Cinema cinema)
     {
       var modlist = new List<MoviesOnDay>();
       for (var x = 0; x <= 3; x++)
@@ -80,7 +86,7 @@ namespace Cinema.GoogleMovies
 
         if (g.Length > 0)
         {
-          g0 = g[0];
+          g0 = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(g[0]).Where(bn => bn < 128).ToArray()).Replace("hr ",":").Replace("min","");
         }
 
         if (g.Length > 1)
@@ -108,6 +114,8 @@ namespace Cinema.GoogleMovies
         {
           t = t.Replace("<", "");
         }
+
+        t = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(t).Where(bn => bn < 128).ToArray());
 
         l.Add(t.Substring(t.IndexOf(">", StringComparison.Ordinal) + 1));
       }
@@ -139,7 +147,7 @@ namespace Cinema.GoogleMovies
 
     #endregion
 
-    #region "Get Cinemas"
+    #region Get Cinemas
 
     public static List<Cinema> GetCinemas(string search)
     {
@@ -190,7 +198,7 @@ namespace Cinema.GoogleMovies
         var near = GetSubstring(b[x], "near=", "&tid=");
         // Neue Kinos eintragen
         if (i == "") continue;
-        var cinema = new Cinema { Id = i, Name = n, Address = a, Near = near};
+        var cinema = new Cinema { Id = i, Name = n, Address = a, Near = near };
         cl.Add(cinema);
       }
       return cl;
@@ -210,7 +218,7 @@ namespace Cinema.GoogleMovies
 
     #endregion
 
-    #region "Helper"
+    #region Helper
 
     private static string GetSubstring(string value, string start, string ende)
     {
@@ -227,7 +235,7 @@ namespace Cinema.GoogleMovies
       }
     }
 
-    private static string GetSubstring(string value, string start, string start2, string ende)
+    public static string GetSubstring(string value, string start, string start2, string ende)
     {
       try
       {
@@ -242,7 +250,7 @@ namespace Cinema.GoogleMovies
       }
     }
 
-    private static string GetWebsiteText(string url)
+    public static string GetWebsiteText(string url)
     {
       WebRequest request = WebRequest.Create(url);
       request.Credentials = CredentialCache.DefaultCredentials;
@@ -276,7 +284,7 @@ namespace Cinema.GoogleMovies
     #endregion
   }
 
-  #region "Cinema Structs"
+  #region Cinema Structs
 
   public struct CinemaDataList
   {
@@ -309,6 +317,9 @@ namespace Cinema.GoogleMovies
     public string Runtime;
     public List<string> Showtimes;
     public string Title;
+    public string AgeLimit;
+    public string Year;
+
   }
 
   #endregion

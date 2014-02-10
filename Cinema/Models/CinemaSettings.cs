@@ -45,11 +45,15 @@ namespace Cinema.Models
 
     #endregion
 
+    #region Vars
+
     public ItemsList Cinemas = new ItemsList();
 
     private static List<GoogleMovies.Cinema> _selectedCinemas = new List<GoogleMovies.Cinema>();
     private static List<GoogleMovies.Cinema> _allCinemas = new List<GoogleMovies.Cinema>();
-    private LocationSettings _lSettings = new LocationSettings();
+    private Locations _lSettings = new Locations();
+
+    #endregion
 
     #region Propertys
 
@@ -68,10 +72,37 @@ namespace Cinema.Models
 
     #endregion
 
+    #region public Methods
+
+    public void ReadCinemas()
+    {
+      Cinemas.Clear();
+      AddSelectedCinemasToAllCinemas();
+
+      foreach (var c in GoogleMovies.GoogleMovies.GetCinemas(Location).Where(IsCinemaNew))
+      {
+        _allCinemas.Add(c);
+      }
+
+      AddAllCinemas();
+      Cinemas.FireChange();
+    }
+
+    public void Select(ListItem item)
+    {
+      item.Selected = !item.Selected;
+      SetSelectedCinemas();
+      item.FireChange();
+    }
+
+    #endregion
+
+    #region private Methods
+
     private void Init()
     {
       var settingsManager = ServiceRegistration.Get<ISettingsManager>();
-      _lSettings = settingsManager.Load<LocationSettings>();
+      _lSettings = settingsManager.Load<Locations>();
       if (_lSettings.LocationSetupList != null)
       {
         _selectedCinemas = _lSettings.LocationSetupList;
@@ -91,23 +122,10 @@ namespace Cinema.Models
       }
     }
 
-    public void ReadCinemas()
-    {
-      Cinemas.Clear();
-      AddSelectedCinemasToAllCinemas();
-
-      foreach (var c in GoogleMovies.GoogleMovies.GetCinemas(Location).Where(IsCinemaNew))
-      {
-        _allCinemas.Add(c);
-      }
-      AddAllCinemas();
-      Cinemas.FireChange();
-    }
-
     private void AddAllCinemas()
     {
       foreach (var c in _allCinemas)
-      {      
+      {
         var item = new ListItem();
         item.AdditionalProperties[NAME] = c.Id;
         item.SetLabel("Text", c.Name + " - " + c.Address);
@@ -129,13 +147,6 @@ namespace Cinema.Models
       return _selectedCinemas.Any(ci => cinema.Id == ci.Id);
     }
 
-    public void Select(ListItem item)
-    {
-      item.Selected = !item.Selected;
-      SetSelectedCinemas();
-      item.FireChange();
-    }
-
     private void SetSelectedCinemas()
     {
       _selectedCinemas = new List<GoogleMovies.Cinema>();
@@ -144,6 +155,8 @@ namespace Cinema.Models
         _selectedCinemas.Add(c);
       }
     }
+
+    #endregion
 
     #region IWorkflowModel implementation
 
@@ -164,7 +177,25 @@ namespace Cinema.Models
 
     public void ExitModelContext(NavigationContext oldContext, NavigationContext newContext)
     {
+      // copy all CinemaIds in a List to compare with the old Cinemas
+      var l = _selectedCinemas.Select(c => c.Id).ToList();
+      var b = false;
+
+      // compare with old Cinemas
+      foreach (var c in _lSettings.LocationSetupList.Where(c => !l.Contains(c.Id)))
+      {
+        b = true;
+      }
+
+      // Cinema Added or Removed
+      if (_selectedCinemas.Count != _lSettings.LocationSetupList.Count)
+      {
+        b = true;
+      }
+
+      // Save the Settings
       _lSettings.LocationSetupList = _selectedCinemas;
+      _lSettings.Changed = b;
       ServiceRegistration.Get<ISettingsManager>().Save(_lSettings);
     }
 
