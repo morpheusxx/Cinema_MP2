@@ -41,9 +41,9 @@ namespace Cinema.Player
     {
       get
       {
-        if (_mediaWorkflowStateType == MediaWorkflowStateType.CurrentlyPlaying)
-          return SCREEN_FULLSCREEN_VIDEO;
         if (_mediaWorkflowStateType == MediaWorkflowStateType.FullscreenContent)
+          return SCREEN_FULLSCREEN_VIDEO;
+        if (_mediaWorkflowStateType == MediaWorkflowStateType.CurrentlyPlaying)
           return SCREEN_CURRENTLY_PLAYING_VIDEO;
         return null;
       }
