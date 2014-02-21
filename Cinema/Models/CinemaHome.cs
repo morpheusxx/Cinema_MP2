@@ -33,9 +33,11 @@ using Cinema.Settings;
 using MediaPortal.Common;
 using MediaPortal.Common.General;
 using MediaPortal.Common.Settings;
+using MediaPortal.Extensions.UserServices.FanArtService.Client.Models;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
 using MediaPortal.UI.Presentation.Workflow;
+using MediaPortal.UI.SkinEngine.Controls.ImageSources;
 
 namespace Cinema.Models
 {
@@ -133,6 +135,19 @@ namespace Cinema.Models
         //oneItemSelected = true;
       }
       Movies.FireChange();
+    }
+
+    public void SetSelectedItem(ListItem selectedItem)
+    {
+      var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
+      if (fanArtBgModel != null)
+      {
+        string uriSource = null;
+        if (selectedItem != null)
+          uriSource = selectedItem.Labels["Picture"].ToString();
+
+        fanArtBgModel.ImageSource = uriSource != null ? new MultiImageSource { UriSource = uriSource } : null;
+      }
     }
 
     public static void MakeUpdate()

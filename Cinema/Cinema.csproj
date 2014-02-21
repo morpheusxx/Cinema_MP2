@@ -140,6 +140,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Incubator\FanArtService.Client\FanArtService.Client.csproj">
+      <Project>{cda7272f-e218-42a0-a53a-2d44e4015ff7}</Project>
+      <Name>FanArtService.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Source\Core\MediaPortal.Utilities\MediaPortal.Utilities.csproj">
+      <Project>{4fe7b8ae-1330-424a-91a1-c68d7abf9cb8}</Project>
+      <Name>MediaPortal.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Source\UI\Players\VideoPlayer\VideoPlayers.csproj">
       <Project>{ed9a8a29-91dd-4b21-8cb8-a8b0f3eff61c}</Project>
       <Name>VideoPlayers</Name>
