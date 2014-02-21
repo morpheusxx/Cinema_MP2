@@ -24,7 +24,6 @@
 
 using MediaPortal.Common;
 using MediaPortal.Common.Localization;
-using MediaPortal.Common.Settings;
 using Previewnetworks_v31;
 
 namespace Cinema.Helper
@@ -33,8 +32,8 @@ namespace Cinema.Helper
   {
     public static Search.Country DefaultCountry()
     {
-      var settingsManager = ServiceRegistration.Get<ISettingsManager>();
-      var re = settingsManager.Load<RegionSettings>().Culture;
+      var localization = ServiceRegistration.Get<ILocalization>();
+      var re = localization.CurrentCulture.Name;
 
       if (re.Contains("de-CH"))
         return Search.Country.Switzerland_German;
