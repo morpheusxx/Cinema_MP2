@@ -46,9 +46,8 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Previewnetworks_v31, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MediaPortal-2-master\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\Previewnetworks_v31.dll</HintPath>
+    <Reference Include="Previewnetworks_v31">
+      <HintPath>..\Previewnetworks_v31.dll</HintPath>
     </Reference>
     <Reference Include="SkinEngine">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\SkinEngine\SkinEngine.dll</HintPath>
@@ -57,9 +56,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="VideoPlayers">
-      <HintPath>..\..\..\MediaPortal-2-master\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -97,7 +93,6 @@
     </Content>
     <Content Include="Skin\default\screens\CinemaHome.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
     <Content Include="Skin\default\workflow\cinema-actions.xml">
       <SubType>Designer</SubType>
@@ -106,13 +101,11 @@
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgUpdate.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaSettings.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -124,31 +117,42 @@
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectQuality.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectContentLanguage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectCinema.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaFullscreenContent.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaInformations.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Source\UI\Players\VideoPlayer\VideoPlayers.csproj">
+      <Project>{ed9a8a29-91dd-4b21-8cb8-a8b0f3eff61c}</Project>
+      <Name>VideoPlayers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Titanium\screens\CinemaFullscreenContent.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Reflexion\screens\CinemaFullscreenContent.xaml">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
