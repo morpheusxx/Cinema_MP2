@@ -164,7 +164,7 @@ namespace Cinema.Models
     {
       CkeckUpdate();
 
-      if (GoogleMovies.GoogleMovies.DataList.Datalist != null)
+      if (GoogleMovies.GoogleMovies.DataList.Datalist != null && GoogleMovies.GoogleMovies.DataList.Datalist.Count > 0)
       {
         SelectCinema(GoogleMovies.GoogleMovies.DataList.Datalist[0].Current.Id);
       }

@@ -181,17 +181,17 @@ namespace Cinema.Models
       var l = _selectedCinemas.Select(c => c.Id).ToList();
       var b = false;
 
-      // compare with old Cinemas
-      foreach (var c in _lSettings.LocationSetupList.Where(c => !l.Contains(c.Id)))
+      if (_lSettings.LocationSetupList != null)
       {
-        b = true;
-      }
+        // compare with old Cinemas
+        b |= _lSettings.LocationSetupList.Any(c => !l.Contains(c.Id));
 
-      // Cinema Added or Removed
-      if (_selectedCinemas.Count != _lSettings.LocationSetupList.Count)
-      {
-        b = true;
+        // Cinema Added or Removed
+        b |= _selectedCinemas.Count != _lSettings.LocationSetupList.Count;
       }
+      else
+        // If there was no old list
+        b = true;
 
       // Save the Settings
       _lSettings.LocationSetupList = _selectedCinemas;
