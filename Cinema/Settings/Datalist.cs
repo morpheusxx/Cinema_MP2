@@ -1,7 +1,7 @@
-﻿#region Copyright (C) 2007-2013 Team MediaPortal
+﻿#region Copyright (C) 2007-2014 Team MediaPortal
 
 /*
-    Copyright (C) 2007-2013 Team MediaPortal
+    Copyright (C) 2007-2014 Team MediaPortal
     http://www.team-mediaportal.com
 
     This file is part of MediaPortal 2
@@ -22,7 +22,7 @@
 
 #endregion
 
-using Cinema.GoogleMovies;
+using GoogleMovies;
 using MediaPortal.Common.Settings;
 
 namespace Cinema.Settings
@@ -30,7 +30,7 @@ namespace Cinema.Settings
   /// <summary>
   /// Datalist Settings Class
   /// </summary>
-  internal class Datalist
+  public class Datalist
   {
     /// <summary>
     /// Constructor
@@ -43,7 +43,7 @@ namespace Cinema.Settings
     /// <summary>
     /// Constructor
     /// </summary>
-    public Datalist(GoogleMovies.CinemaDataList list)
+    public Datalist(CinemaDataList list)
     {
       CinemaDataList = list;
     }
@@ -52,6 +52,6 @@ namespace Cinema.Settings
     /// List of all Locations
     /// </summary>
     [Setting(SettingScope.User, null)]
-    public GoogleMovies.CinemaDataList  CinemaDataList { get; set; }
+    public CinemaDataList  CinemaDataList { get; set; }
   }
 }

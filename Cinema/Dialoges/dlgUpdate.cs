@@ -1,7 +1,7 @@
-﻿#region Copyright (C) 2007-2013 Team MediaPortal
+﻿#region Copyright (C) 2007-2014 Team MediaPortal
 
 /*
-    Copyright (C) 2007-2013 Team MediaPortal
+    Copyright (C) 2007-2014 Team MediaPortal
     http://www.team-mediaportal.com
 
     This file is part of MediaPortal 2
@@ -25,7 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cinema.GoogleMovies;
+using GoogleMovies;
 using Cinema.Helper;
 using Cinema.Previewnetworks;
 using Cinema.Settings;
@@ -35,6 +35,7 @@ using MediaPortal.Common.Settings;
 using MediaPortal.UI.Presentation.Models;
 using MediaPortal.UI.Presentation.Screens;
 using MediaPortal.UI.Presentation.Workflow;
+using Movies = Cinema.Settings.Movies;
 
 namespace Cinema.Dialoges
 {
@@ -86,7 +87,7 @@ namespace Cinema.Dialoges
       _settings = SETTINGS_MANAGER.Load<CinemaSettings>();
       _locations = SETTINGS_MANAGER.Load<Locations>();
 
-      GoogleMovies.GoogleMovies.DataList = new CinemaDataList { Datalist = new List<CinemaData>() };
+      GoogleMovies.GoogleMovies.Data = new CinemaDataList { List = new List<CinemaData>() };
 
       if (_locations.LocationSetupList != null)
       {
@@ -96,7 +97,7 @@ namespace Cinema.Dialoges
         foreach (var c in cl)
         {
           Info = c.Name;
-          GoogleMovies.GoogleMovies.DataList.Datalist.Add(GoogleMovies.GoogleMovies.GetCinemaData(c));
+          GoogleMovies.GoogleMovies.Data.List.Add(GoogleMovies.GoogleMovies.GetCinemaData(c));
           UpdateProgress += percent;
         }
 
@@ -111,7 +112,7 @@ namespace Cinema.Dialoges
       _locations.Changed = false;
       ServiceRegistration.Get<ISettingsManager>().Save(_locations);
 
-      var datalist = new Datalist { CinemaDataList = GoogleMovies.GoogleMovies.DataList };
+      var datalist = new Datalist { CinemaDataList = GoogleMovies.GoogleMovies.Data };
       ServiceRegistration.Get<ISettingsManager>().Save(datalist);
 
       ServiceRegistration.Get<IScreenManager>().CloseTopmostDialog();
@@ -123,7 +124,7 @@ namespace Cinema.Dialoges
       var l = new List<string>();
       _movies = new Movies();
 
-      foreach (var mo in from cd in GoogleMovies.GoogleMovies.DataList.Datalist from m in cd.MoviesOnDayList from mo in m.Movielist.Where(mo => !l.Contains(mo.Title)) select mo)
+      foreach (var mo in from cd in GoogleMovies.GoogleMovies.Data.List from m in cd.MoviesOnDayList from mo in m.Movielist.Where(mo => !l.Contains(mo.Title)) select mo)
       {
         l.Add(mo.Title);
         ml.Add(mo);

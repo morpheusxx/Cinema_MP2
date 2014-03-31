@@ -6,17 +6,17 @@
   <string name="Cinema.Location.Settings.ScreenTitle">Locations</string>
   <string name="Cinema.Location.Settings.Helptext">Put the Locations of your Cinemas</string>
   <string name="Cinema.Location.Settings.Search">Search</string>
+  
   <string name="Cinema.Settings">Settings</string>
-  <string name="Cinema.Settings.ContenLanguage">Contenlanguage</string>
-  <string name="Cinema.Settings.ContenLanguge.Helptext">Select the Language of the Content</string>
-  <string name="Cinema.LoadUpdate.Header">Load Cinemainformations</string>
+
+  <string name="Cinema.LoadUpdate.Header">Load Informations</string>
   <string name="Cinema.LoadUpdate.Manually">Manually Update</string>
+  
   <string name="Cinema.SelectQuality.Header">Select the Quality</string>
   <string name="Cinema.SelectCinema">Select a Cinema</string>
 
-  <string name="Cinema.Models.CinemaInformations.ComingSoon">Coming Soon</string>
-  <string name="Cinema.Models.CinemaInformations.ComingSoonCinema">Coming Soon on Cinema</string>
-  <string name="Cinema.Models.CinemaInformations.ComingSoonBluRay">Coming Soon on BluRay</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Coming Soon on Cinema</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Coming Soon on BluRay</string>
   
   <string name="Cinema.Movieinfos.Trailer">Trailer</string>
   <string name="Cinema.Movieinfos.Duration">Duration: </string>
@@ -25,16 +25,4 @@
   <string name="Cinema.Movieinfos.Year">Year: </string>
   <string name="Cinema.Movieinfos.Genre">Genre: </string>
   <string name="Cinema.Movieinfos.Premiere">Premiere: </string>
-  
-  <string name="Cinema.Content.uk">English</string>
-  <string name="Cinema.Content.fr">French</string>
-  <string name="Cinema.Content.de">German</string>
-  <string name="Cinema.Content.es">Spanish</string>
-  <string name="Cinema.Content.it">Italian</string>
-  <string name="Cinema.Content.ch">Switzerland (German)</string>
-  <string name="Cinema.Content.ch_fr">Switzerland (French)</string>
-  <string name="Cinema.Content.nl">Dutch</string>
-  <string name="Cinema.Content.dk">Danish</string>
-  <string name="Cinema.Content.se">Swedish</string>
-  <string name="Cinema.Content.fi">Finnish</string>
 </resources>

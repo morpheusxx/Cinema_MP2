@@ -1,7 +1,7 @@
-﻿#region Copyright (C) 2007-2013 Team MediaPortal
+﻿#region Copyright (C) 2007-2014 Team MediaPortal
 
 /*
-    Copyright (C) 2007-2013 Team MediaPortal
+    Copyright (C) 2007-2014 Team MediaPortal
     http://www.team-mediaportal.com
 
     This file is part of MediaPortal 2
@@ -27,19 +27,23 @@ using System.Collections.Generic;
 using Cinema.Helper;
 using Cinema.Player;
 using Cinema.Previewnetworks;
+using Cinema.Settings;
+using MediaPortal.Common;
 using MediaPortal.Common.General;
+using MediaPortal.Extensions.UserServices.FanArtService.Client.Models;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
 using MediaPortal.UI.Presentation.Workflow;
+using MediaPortal.UI.SkinEngine.Controls.ImageSources;
 using Previewnetworks_v31;
 
 namespace Cinema.Models
 {
-  public class CinemaInformations :IWorkflowModel
+  public class CinemaComingSoonCinema : IWorkflowModel
   {
     #region Consts
 
-    public const string MODEL_ID_STR = "D4DC262C-0437-4832-8524-6847FE0AA8F3";
+    public const string MODEL_ID_STR = "F58181FD-9E55-4841-871C-8898453740A5";
     public const string NAME = "name";
     public const string TRAILER = "trailer";
 
@@ -66,22 +70,6 @@ namespace Cinema.Models
 
     #region public Methods
 
-    public static void ComingSoonCinema()
-    {
-      Info = "Cinema";
-      MovieInfo.Movies = new List<Movie>();
-      MovieInfo.Movies = Search.Info(Functions.DefaultCountry(), Search.Feed.Cinema, Search.Typ.coming, 20);
-      FillItems();
-    }
-
-    public static void ComingSoonBlyRay()
-    {
-      Info = "BluRay";
-      MovieInfo.Movies = new List<Movie>();
-      MovieInfo.Movies = Search.Info(Functions.DefaultCountry(), Search.Feed.BluRay, Search.Typ.coming, 20);
-      FillItems();
-    }
-
     public static void SelectMovie(ListItem item)
     {
       var t = new Trailer { Title = (string)item.AdditionalProperties[NAME], Url = (string)item.AdditionalProperties[TRAILER] };
@@ -91,12 +79,35 @@ namespace Cinema.Models
       }
     }
 
+    public void SetSelectedItem(ListItem selectedItem)
+    {
+      if (selectedItem != null)
+      {
+        var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
+        if (fanArtBgModel != null)
+        {
+          string uriSource = selectedItem.Labels["Picture"].ToString();
+
+          if (uriSource != "") fanArtBgModel.ImageSource = new MultiImageSource { UriSource = uriSource };
+          else fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
+        }
+      }
+    }
+
     #endregion
 
     #region private Methods
 
+    private void Init()
+    {
+      MovieInfo.Movies = new List<Movie>();
+      MovieInfo.Movies = Search.Info(Functions.DefaultCountry(), Search.Feed.Cinema, Search.Typ.coming, 20);
+      FillItems();
+    }
+
     private static void FillItems()
     {
+      Items.Clear();
       for (int x = 0; x <= MovieInfo.Movies.Count - 1; x++)
       {
         var item = new ListItem();
@@ -105,7 +116,6 @@ namespace Cinema.Models
         item.SetLabel("Poster", MovieInfo.Poster(x));
         item.SetLabel("Picture", MovieInfo.Picture(x));
         item.SetLabel("Description", MovieInfo.Description(x));
-        item.SetLabel("Year", MovieInfo.Year(x));
         item.SetLabel("AgeLimit", MovieInfo.AgeLimit(x));
         item.SetLabel("Genre", MovieInfo.Genres(x));
         item.AdditionalProperties[TRAILER] = MovieInfo.Trailer("mp4 / xxlarge", x);
@@ -114,6 +124,15 @@ namespace Cinema.Models
         Items.Add(item);
       }
       Items.FireChange();
+    }
+
+    private void ClearFanart()
+    {
+      var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
+      if (fanArtBgModel != null)
+      {
+        fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
+      }
     }
 
     #endregion
@@ -132,16 +151,16 @@ namespace Cinema.Models
 
     public void EnterModelContext(NavigationContext oldContext, NavigationContext newContext)
     {
-      ComingSoonCinema();
+      Init();
     }
 
     public void ExitModelContext(NavigationContext oldContext, NavigationContext newContext)
     {
+      ClearFanart();
     }
 
     public void ChangeModelContext(NavigationContext oldContext, NavigationContext newContext, bool push)
     {
-      // We could initialize some data here when changing the media navigation state
     }
 
     public void Deactivate(NavigationContext oldContext, NavigationContext newContext)
@@ -150,7 +169,6 @@ namespace Cinema.Models
 
     public void Reactivate(NavigationContext oldContext, NavigationContext newContext)
     {
-      // Todo: select any or the Last ListItem
     }
 
     public void UpdateMenuActions(NavigationContext context, IDictionary<Guid, WorkflowAction> actions)
@@ -163,6 +181,5 @@ namespace Cinema.Models
     }
 
     #endregion
-
   }
 }

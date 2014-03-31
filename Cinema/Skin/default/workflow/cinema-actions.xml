@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Workflow DescriptorVersion="1.0">
-  
+<Workflow DescriptorVersion="1.0">  
   <MenuActions>
     <!-- Entrys in Homemenu -->
     <PushNavigationTransition Id="BD93C5B3-402C-40A2-B323-DA891ED5F50E"
@@ -30,31 +29,22 @@
       ModelId="78E0D999-D87A-4340-B8D1-9CF97814D2FD"
       MethodName="MakeUpdate"/>   
     
-    <!--ComingSoon-->
+    <!--ComingSoon Cinema-->
     <PushNavigationTransition Id="18CCCE93-2C01-4587-80E7-F2329C694B03"
-      Name="Cinema->CinemaInformations"
+      Name="Cinema->CinemaComingSoonCinema"
       DisplayCategory="z-Cinema"
       SortOrder="a"
       SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
       TargetState="BF53FB1C-C846-48F2-BF1B-B848B7144102"
-      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoon]"/>
-    
-    <!--Coming Soon Cinema-->
-    <MethodCallAction Id="42A4A26C-ABD1-4186-A687-07FE81F96BE7"
-      Name="ComingSoonCinma"
-      DisplayCategory="z-Cinema"
-      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoonCinema]"
-      SourceStates="BF53FB1C-C846-48F2-BF1B-B848B7144102"
-      ModelId="D4DC262C-0437-4832-8524-6847FE0AA8F3"
-      MethodName="ComingSoonCinema"/>
+      DisplayTitle="[Cinema.Models.CinemaComingSoonCinema]"/>
 
-    <!--Coming Soon a-->
-    <MethodCallAction Id="426FE0A3-77C2-4013-857A-43534C1CF700"
-      Name="ComingSoonBluRay"
+    <!--ComingSoon BluRay-->
+    <PushNavigationTransition Id="E688CF8E-81EB-45D5-BF2D-E6A5A21CD10A"
+      Name="Cinema->CinemaComingSoonBluRay"
       DisplayCategory="z-Cinema"
-      DisplayTitle="[Cinema.Models.CinemaInformations.ComingSoonBluRay]"
-      SourceStates="BF53FB1C-C846-48F2-BF1B-B848B7144102"
-      ModelId="D4DC262C-0437-4832-8524-6847FE0AA8F3"
-      MethodName="ComingSoonBlyRay"/>
+      SortOrder="a"
+      SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
+      TargetState="64C1F471-8495-46D3-8DEC-2F07DAE5DD7E"
+      DisplayTitle="[Cinema.Models.CinemaComingSoonBluRay]"/>
   </MenuActions>
 </Workflow>

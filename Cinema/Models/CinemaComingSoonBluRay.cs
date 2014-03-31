@@ -24,63 +24,51 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Cinema.Dialoges;
+using Cinema.Helper;
 using Cinema.Player;
+using Cinema.Previewnetworks;
 using Cinema.Settings;
 using MediaPortal.Common;
 using MediaPortal.Common.General;
-using MediaPortal.Common.Settings;
 using MediaPortal.Extensions.UserServices.FanArtService.Client.Models;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
 using MediaPortal.UI.Presentation.Workflow;
 using MediaPortal.UI.SkinEngine.Controls.ImageSources;
+using Previewnetworks_v31;
 
 namespace Cinema.Models
 {
-  public class CinemaHome : IWorkflowModel
+  public class CinemaComingSoonBluRay :IWorkflowModel
   {
     #region Consts
 
-    public const string MODEL_ID_STR = "78E0D999-D87A-4340-B8D1-9CF97814D2FD";
+    public const string MODEL_ID_STR = "50AD907D-32F2-4633-B017-E9BFC6B6C960";
     public const string NAME = "name";
     public const string TRAILER = "trailer";
 
     #endregion
 
-    public ItemsList Cinemas = new ItemsList();
-    public static ItemsList Movies = new ItemsList();
-
-    private static readonly ISettingsManager SETTINGS_MANAGER = ServiceRegistration.Get<ISettingsManager>();
-
     #region Propertys
 
-    public static readonly AbstractProperty _selectedCinema = new WProperty(typeof(string), string.Empty);
+    private static AbstractProperty _infoProperty = new WProperty(typeof(string), string.Empty);
 
-    public AbstractProperty SelectedCinemaProperty
+    public AbstractProperty InfoProperty
     {
-      get { return _selectedCinema; }
+      get { return _infoProperty; }
     }
 
-    public static string SelectedCinema
+    public static string Info
     {
-      get { return (string)_selectedCinema.GetValue(); }
-      set { _selectedCinema.SetValue(value); }
+      get { return (string)_infoProperty.GetValue(); }
+      set { _infoProperty.SetValue(value); }
     }
 
-    #endregion   
+    #endregion
+
+    public static ItemsList Items = new ItemsList();
 
     #region public Methods
-
-    public static void SelectCinema(string id)
-    {
-      foreach (var cd in GoogleMovies.GoogleMovies.Data.List.Where(cd => cd.Current.Id == id))
-      {
-        SelectedCinema = cd.Current.Name;
-        AddMoviesByCinema(cd.Current);
-      }
-    }
 
     public static void SelectMovie(ListItem item)
     {
@@ -89,45 +77,6 @@ namespace Cinema.Models
       {
         CinemaPlayerHelper.PlayStream(t);
       }
-    }
-
-    public static void AddMoviesByCinema(GoogleMovies.Cinema cinema)
-    {
-      Movies.Clear();
-
-      var ml = GoogleMovies.GoogleMovies.GetMoviesByCinema(cinema);
-
-      foreach (var m in ml)
-      {
-        var item = new ListItem();
-        item.AdditionalProperties[NAME] = m.Title;
-        item.SetLabel("Name", m.Title);
-
-        for (var i = 0; i <= 3; i++)
-        { 
-          item.SetLabel("Day" + Convert.ToString(i), ShowtimesByCinemaMovieDay(cinema, m, i).Substring(0,10));
-          item.SetLabel("Day" + Convert.ToString(i) + "_Time", ShowtimesByCinemaMovieDay(cinema, m, i).Substring(12));
-        }
-
-        var mm = SETTINGS_MANAGER.Load<Movies>().MovieList;
-
-        foreach (var t in mm)
-        {
-          if (t.Title == m.Title)
-          {
-            item.SetLabel("Poster", t.Poster);
-            item.SetLabel("Picture", t.Picture);
-            item.SetLabel("Description", t.Description);
-            item.SetLabel("Year", t.Year);
-            item.SetLabel("AgeLimit", t.AgeLimit);
-            item.SetLabel("Genre", t.Genre);
-            item.AdditionalProperties[TRAILER] = t.Trailer;
-          }
-        }
-        item.SetLabel("Duration", m.Runtime);
-        Movies.Add(item);
-      }
-      Movies.FireChange();
     }
 
     public void SetSelectedItem(ListItem selectedItem)
@@ -145,49 +94,37 @@ namespace Cinema.Models
       }
     }
 
-    public static void MakeUpdate()
-    {
-      ServiceRegistration.Get<IWorkflowManager>().NavigatePush(new Guid("48FE28A6-868D-4531-BF2F-1E746769B177"));
-      DlgUpdate.MakeUpdate();
-    }
-
     #endregion
 
     #region private Methods
 
-    private static void Init()
+    private void Init()
     {
-      CkeckUpdate();
-
-      if (GoogleMovies.GoogleMovies.Data.List != null && GoogleMovies.GoogleMovies.Data.List.Count > 0)
-      {
-        SelectCinema(GoogleMovies.GoogleMovies.Data.List[0].Current.Id);
-      }
+      MovieInfo.Movies = new List<Movie>();
+      MovieInfo.Movies = Search.Info(Functions.DefaultCountry(), Search.Feed.BluRay, Search.Typ.coming, 20);
+      FillItems();
     }
 
-    private static void CkeckUpdate()
+    private static void FillItems()
     {
-      var dt1 = Convert.ToDateTime(SETTINGS_MANAGER.Load<Settings.CinemaSettings>().LastUpdate);
-      var dt = DateTime.Now - dt1;
-      // Is it a New Day ?
-      if (dt > new TimeSpan(1, 0, 0, 0))
+      Items.Clear();
+      for (int x = 0; x <= MovieInfo.Movies.Count - 1; x++)
       {
-        MakeUpdate();
+        var item = new ListItem();
+        item.AdditionalProperties[NAME] = MovieInfo.Movies[x].Regions[0].products[0].product_title;
+        item.SetLabel("Name", MovieInfo.Movies[x].Regions[0].products[0].product_title);
+        item.SetLabel("Poster", MovieInfo.Poster(x));
+        item.SetLabel("Picture", MovieInfo.Picture(x));
+        item.SetLabel("Description", MovieInfo.Description(x));
+        item.SetLabel("Year", MovieInfo.Year(x));
+        item.SetLabel("AgeLimit", MovieInfo.AgeLimit(x));
+        item.SetLabel("Genre", MovieInfo.Genres(x));
+        item.AdditionalProperties[TRAILER] = MovieInfo.Trailer("mp4 / xxlarge", x);
+        item.SetLabel("Duration", MovieInfo.Duration(x));
+        item.SetLabel("Premiere", MovieInfo.Premiere(x));
+        Items.Add(item);
       }
-      else if (SETTINGS_MANAGER.Load<Locations>().Changed)
-      {
-        MakeUpdate();
-      }
-      else
-      {
-        GoogleMovies.GoogleMovies.Data = SETTINGS_MANAGER.Load<Datalist>().CinemaDataList;
-      }
-    }
-
-    private static String ShowtimesByCinemaMovieDay(GoogleMovies.Cinema cinema, GoogleMovies.Movie movie, int day)
-    {
-      var st = GoogleMovies.GoogleMovies.GetShowTimesByCinemaAndMovieAndDay(cinema, movie, day).Aggregate("", (current, s) => current + (s + " | "));
-      return GoogleMovies.GoogleMovies.GetNewDay(day) + ": " + st;
+      Items.FireChange();
     }
 
     private void ClearFanart()
@@ -225,7 +162,6 @@ namespace Cinema.Models
 
     public void ChangeModelContext(NavigationContext oldContext, NavigationContext newContext, bool push)
     {
-      // We could initialize some data here when changing the media navigation state
     }
 
     public void Deactivate(NavigationContext oldContext, NavigationContext newContext)
@@ -234,7 +170,6 @@ namespace Cinema.Models
 
     public void Reactivate(NavigationContext oldContext, NavigationContext newContext)
     {
-      // Todo: select any or the Last ListItem
     }
 
     public void UpdateMenuActions(NavigationContext context, IDictionary<Guid, WorkflowAction> actions)

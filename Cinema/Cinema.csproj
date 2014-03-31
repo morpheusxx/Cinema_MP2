@@ -34,23 +34,32 @@
   <ItemGroup>
     <Reference Include="DirectShowWrapper">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\DirectShowWrapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GoogleMovies">
+      <HintPath>D:\MediaPortal-2-EXP_20140222\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\GoogleMovies.dll</HintPath>
     </Reference>
     <Reference Include="Media">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\Media\Media.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MediaPortal.Common">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MediaPortal.UI">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Previewnetworks_v31">
-      <HintPath>..\Previewnetworks_v31.dll</HintPath>
+      <HintPath>D:\MediaPortal-2-EXP_20140222\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\Previewnetworks_v31.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SkinEngine">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\SkinEngine\SkinEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,13 +72,14 @@
     <Compile Include="Dialoges\DlgSelectContentLanguage.cs" />
     <Compile Include="Dialoges\DlgSelectQuality.cs" />
     <Compile Include="Dialoges\DlgUpdate.cs" />
-    <Compile Include="GoogleMovies\GoogleMovies.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\GrappedMovie.cs" />
-    <Compile Include="Helper\Trailer.cs" />
+    <Compile Include="Settings\Trailer.cs" />
+    <Compile Include="Models\CinemaComingSoonBluRay.cs" />
+    <Compile Include="Models\CinemaComingSoonCinema.cs" />
     <Compile Include="Models\CinemaHome.cs" />
-    <Compile Include="Models\CinemaInformations.cs" />
     <Compile Include="Models\CinemaSettings.cs" />
+    <Compile Include="Models\CinemaTrailerSearch.cs" />
     <Compile Include="Player\CinemaPlayer.cs" />
     <Compile Include="Player\CinemaPlayerHelper.cs" />
     <Compile Include="Player\CinemaUIContributor.cs" />
@@ -79,10 +89,13 @@
     <Compile Include="Settings\Configuration\Locations.cs" />
     <Compile Include="Settings\Datalist.cs" />
     <Compile Include="Settings\Locations.cs" />
-    <Compile Include="Settings\Movie.cs" />
+    <Compile Include="Settings\Movies.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Language\strings_en.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="plugin - Kopieren.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="plugin.xml">
@@ -135,22 +148,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Skin\default\screens\CinemaInformations.xaml">
+    <Content Include="Skin\default\screens\CinemaComingSoonCinema.xaml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Incubator\FanArtService.Client\FanArtService.Client.csproj">
+    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Incubator\FanArtService.Client\FanArtService.Client.csproj">
       <Project>{cda7272f-e218-42a0-a53a-2d44e4015ff7}</Project>
       <Name>FanArtService.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Source\Core\MediaPortal.Utilities\MediaPortal.Utilities.csproj">
+    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Source\Core\MediaPortal.Utilities\MediaPortal.Utilities.csproj">
       <Project>{4fe7b8ae-1330-424a-91a1-c68d7abf9cb8}</Project>
       <Name>MediaPortal.Utilities</Name>
+      <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MediaPortal-2\MediaPortal\Source\UI\Players\VideoPlayer\VideoPlayers.csproj">
+    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Source\UI\Players\VideoPlayer\VideoPlayers.csproj">
       <Project>{ed9a8a29-91dd-4b21-8cb8-a8b0f3eff61c}</Project>
       <Name>VideoPlayers</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -159,22 +175,62 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Skin\default\screens\CinemaComingSoonBluRay.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Titanium\screens\CinemaComingSoonBluRay.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Titanium\screens\CinemaComingSoonCinema.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Titanium\screens\CinemaHome.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Titanium\screens\CinemaCurrentlyPlaying.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Reflexion\screens\CinemaComingSoonBluRay.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Reflexion\screens\CinemaComingSoonCinema.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Reflexion\screens\CinemaCurrentlyPlaying.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaFullscreenContent.xaml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skin\Reflexion\screens\CinemaHome.xaml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Language"
-
 robocopy "$(ProjectDir)Language" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Language" /MIR
-
 mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin"
-
 robocopy "$(ProjectDir)Skin" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin" /MIR 
-
 xcopy /Y "$(ProjectDir)plugin.xml" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
-
 xcopy /Y "$(TargetPath)" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

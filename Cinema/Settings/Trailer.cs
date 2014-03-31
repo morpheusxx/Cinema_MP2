@@ -1,7 +1,7 @@
-﻿#region Copyright (C) 2007-2013 Team MediaPortal
+﻿#region Copyright (C) 2007-2014 Team MediaPortal
 
 /*
-    Copyright (C) 2007-2013 Team MediaPortal
+    Copyright (C) 2007-2014 Team MediaPortal
     http://www.team-mediaportal.com
 
     This file is part of MediaPortal 2
@@ -22,28 +22,43 @@
 
 #endregion
 
-using System.Collections.Generic;
-using Cinema.Helper;
 using MediaPortal.Common.Settings;
 
 namespace Cinema.Settings
 {
-  internal class Movies
+  /// <summary>
+  /// Definition for a Trailer
+  /// </summary>
+  internal class Trailer
   {
-    public Movies()
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Trailer()
     {
-      MovieList = new List<GrappedMovie>();
+      Url = string.Empty;
+      Title = string.Empty;
     }
-
-    public Movies(List<GrappedMovie> list)
+    
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public Trailer(string url, string title)
     {
-      MovieList = list;
+      Url = url;
+      Title = title;
     }
 
     /// <summary>
-    /// List of all Locations
+    /// URL
     /// </summary>
-    [Setting(SettingScope.User, null)]
-    public List<GrappedMovie> MovieList { get; set; }
+    [Setting(SettingScope.User, "")]
+    public string Url { get; set; }
+
+    /// <summary>
+    /// Title
+    /// </summary>
+    [Setting(SettingScope.User, "")]
+    public string Title { get; set; }
   }
 }

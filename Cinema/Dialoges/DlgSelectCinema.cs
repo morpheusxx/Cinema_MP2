@@ -1,7 +1,7 @@
-﻿#region Copyright (C) 2007-2013 Team MediaPortal
+﻿#region Copyright (C) 2007-2014 Team MediaPortal
 
 /*
-    Copyright (C) 2007-2013 Team MediaPortal
+    Copyright (C) 2007-2014 Team MediaPortal
     http://www.team-mediaportal.com
 
     This file is part of MediaPortal 2
@@ -49,7 +49,7 @@ namespace Cinema.Dialoges
       items.Clear();
       var oneItemSelected = false;
 
-      foreach (var cd in GoogleMovies.GoogleMovies.DataList.Datalist)
+      foreach (var cd in GoogleMovies.GoogleMovies.Data.List)
       {
         var item = new ListItem();
         item.AdditionalProperties[NAME] = cd.Current.Id;
