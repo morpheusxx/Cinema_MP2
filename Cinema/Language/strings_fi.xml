@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="Cinema.Location.Settings.Search">Etsi</string>
+  <string name="Cinema.Settings">Asetukset</string>
+  <string name="Cinema.LoadUpdate.Header">Lataa tiedot</string>
+  <string name="Cinema.LoadUpdate.Manually">Päivitä manuaalisesti</string>
+</resources>

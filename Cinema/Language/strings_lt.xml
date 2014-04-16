@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="Cinema.Title">Kino teatras</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Vietovės</string>
+  <string name="Cinema.Location.Settings.Helptext">Pridėti kino teatrus jūsų vietovėje</string>
+  <string name="Cinema.Location.Settings.Search">Paieška</string>
+  <string name="Cinema.Settings">Nustatymai</string>
+  <string name="Cinema.LoadUpdate.Header">Užkrauti informaciją</string>
+  <string name="Cinema.LoadUpdate.Manually">Atnaujinti rankiniu būdu</string>
+  <string name="Cinema.SelectQuality.Header">Pasirinkti kokybę</string>
+  <string name="Cinema.SelectCinema">Pasirinkti kino teatrą</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Bus greitai rodoma kino teatruose</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Greitai bus išleista BluRay</string>
+  <string name="Cinema.Movieinfos.Trailer">Anonsas</string>
+  <string name="Cinema.Movieinfos.Duration">Trukmė: </string>
+  <string name="Cinema.Movieinfos.AgeLimit">Amžiaus ribojimas:</string>
+  <string name="Cinema.Movieinfos.Actor">Aktorius</string>
+  <string name="Cinema.Movieinfos.Year">Metai:</string>
+  <string name="Cinema.Movieinfos.Genre">Žanras:</string>
+  <string name="Cinema.Movieinfos.Premiere">Premjera:</string>
+</resources>

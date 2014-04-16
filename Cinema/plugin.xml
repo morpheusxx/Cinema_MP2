@@ -4,40 +4,27 @@
   PluginId="{6C74404D-5D4E-4774-A368-01911886B7EC}"
   Author="BigGranu"
   Copyright="GPL"
-  Description="Cinemaprogramm, Trailer, Infos">
-  
-  <Version
-    PluginVersion="1.0"
-    ReleaseDate="2014-02-02 01:00:00 GMT+01:00"
-    CurrentAPI="1"/>
+  Description="Cinemaprogramm, Trailer, Infos"
+  PluginVersion="1.0">
 
   <Runtime>
     <Assembly FileName="Cinema.dll"/>
   </Runtime>
-  
-  <DependsOn>
-    <PluginReference PluginId="{D87D92F0-5E71-470a-A2A4-430F90A28BF3}" CompatibleAPI="1" />  SkinEngine 
-    <PluginReference PluginId="{A965AFE5-44F9-46e0-980E-40BBE17F25CA}" CompatibleAPI="1" />  VideoPlayers 
-    <PluginReference PluginId="{15FB35F7-8C85-4404-BC67-BFF28446158A}" CompatibleAPI="1" />  Media 
-    <PluginReference PluginId="{15FD97A4-D925-4D8A-9DF0-5349743EED0C}" CompatibleAPI="1" />  FanArt Service Client 
-    <PluginReference PluginId="{1AFF4467-64B0-4ca1-AF28-9AEDF3525BCE}" CompatibleAPI="1" />  ConfigurationManager 
-    <PluginReference PluginId="{B765A4B6-F455-4941-BDAE-2CE45208BFEB}" CompatibleAPI="1" />  Configuration plugin 
-  </DependsOn>
 
-  <!--<DependsOn>
-    --><!-- SkinEngine --><!--
+	<DependsOn>
+	<!-- SkinEngine -->
     <PluginReference PluginId="{D87D92F0-5E71-470a-A2A4-430F90A28BF3}" />
-    --><!-- VideoPlayers --><!--
+    <!-- VideoPlayers -->
     <PluginReference PluginId="{A965AFE5-44F9-46e0-980E-40BBE17F25CA}" />
-    --><!-- Media --><!--
+    <!-- Media -->
     <PluginReference PluginId="{15FB35F7-8C85-4404-BC67-BFF28446158A}" />
-    --><!-- FanArt Service Client --><!--
+    <!-- FanArt Service Client -->
     <PluginReference PluginId="{15FD97A4-D925-4D8A-9DF0-5349743EED0C}" />
-    --><!-- ConfigurationManager --><!--
+    <!-- ConfigurationManager -->
     <PluginReference PluginId="{1AFF4467-64B0-4ca1-AF28-9AEDF3525BCE}" />
-    --><!-- Configuration plugin --><!--
+    <!-- Configuration plugin -->
     <PluginReference PluginId="{B765A4B6-F455-4941-BDAE-2CE45208BFEB}" />    
-  </DependsOn>-->
+  </DependsOn>
 
   <Register Location="/VideoPlayers/MimeTypeRegistrations">
     <VideoPlayerMimeTypeMapping Id="Cinema" ClassName="Cinema.Player.CinemaPlayer" MimeType="cinema/stream"/>

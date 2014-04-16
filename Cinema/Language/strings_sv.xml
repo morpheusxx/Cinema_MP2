@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="Cinema.Title">Bio</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Platser</string>
+  <string name="Cinema.Location.Settings.Helptext">Ange plats för dina biografer</string>
+  <string name="Cinema.Location.Settings.Search">Sök</string>
+  <string name="Cinema.Settings">Inställningar</string>
+  <string name="Cinema.LoadUpdate.Header">Hämta information</string>
+  <string name="Cinema.LoadUpdate.Manually">Uppdatera manuellt</string>
+  <string name="Cinema.SelectQuality.Header">Välj kvalitet</string>
+  <string name="Cinema.SelectCinema">Välj bio</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Kommer snart på bio</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Kommer snart på bluray</string>
+  <string name="Cinema.Movieinfos.Trailer">Trailer</string>
+  <string name="Cinema.Movieinfos.Duration">Speltid: </string>
+  <string name="Cinema.Movieinfos.AgeLimit">Åldersgräns</string>
+  <string name="Cinema.Movieinfos.Actor">Skådespelare: </string>
+  <string name="Cinema.Movieinfos.Year">År: </string>
+  <string name="Cinema.Movieinfos.Genre">Genre: </string>
+  <string name="Cinema.Movieinfos.Premiere">Premiär</string>
+</resources>

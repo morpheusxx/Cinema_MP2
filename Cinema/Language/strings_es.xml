@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="Cinema.Title">Cine</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Localidades</string>
+  <string name="Cinema.Location.Settings.Helptext">Pon las Localizaciones de tus Cines</string>
+  <string name="Cinema.Location.Settings.Search">Busca</string>
+  <string name="Cinema.Settings">Configuración</string>
+  <string name="Cinema.LoadUpdate.Header">Cargar Información</string>
+  <string name="Cinema.LoadUpdate.Manually">Actualización Manual</string>
+  <string name="Cinema.SelectQuality.Header">Selecciona la Calidad</string>
+  <string name="Cinema.SelectCinema">Selecciona un Cine</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Próximamente en Cines</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Próximamente en BluRay</string>
+  <string name="Cinema.Movieinfos.Trailer">Trailer</string>
+  <string name="Cinema.Movieinfos.Duration">Duración:</string>
+  <string name="Cinema.Movieinfos.AgeLimit">Límite de Edad:</string>
+  <string name="Cinema.Movieinfos.Actor">Actor</string>
+  <string name="Cinema.Movieinfos.Year">Año:</string>
+  <string name="Cinema.Movieinfos.Genre">Género:</string>
+  <string name="Cinema.Movieinfos.Premiere">Estreno:</string>
+</resources>

@@ -36,8 +36,12 @@
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\DirectShowWrapper.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FanArtService.Client">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\FanArtService.Client\FanArtService.Client.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleMovies">
       <HintPath>D:\MediaPortal-2-EXP_20140222\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\GoogleMovies.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Media">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\Media\Media.dll</HintPath>
@@ -49,6 +53,10 @@
     </Reference>
     <Reference Include="MediaPortal.UI">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MediaPortal.Utilities">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.Utilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -65,6 +73,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="VideoPlayers">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -94,134 +106,139 @@
   <ItemGroup>
     <Content Include="Language\strings_en.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="plugin - Kopieren.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="plugin.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Skin\default\images\BD93C5B3-402C-40A2-B323-DA891ED5F50E.JPG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Skin\default\screens\CinemaHome.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Skin\default\workflow\cinema-actions.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgUpdate.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaSettings.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\themes\default\styles\CinemaStyles.xaml">
       <SubType>Component</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectQuality.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectContentLanguage.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\DlgSelectCinema.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaFullscreenContent.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaComingSoonCinema.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Incubator\FanArtService.Client\FanArtService.Client.csproj">
-      <Project>{cda7272f-e218-42a0-a53a-2d44e4015ff7}</Project>
-      <Name>FanArtService.Client</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Source\Core\MediaPortal.Utilities\MediaPortal.Utilities.csproj">
-      <Project>{4fe7b8ae-1330-424a-91a1-c68d7abf9cb8}</Project>
-      <Name>MediaPortal.Utilities</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="D:\MediaPortal-2-EXP_20140222\MediaPortal\Source\UI\Players\VideoPlayer\VideoPlayers.csproj">
-      <Project>{ed9a8a29-91dd-4b21-8cb8-a8b0f3eff61c}</Project>
-      <Name>VideoPlayers</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Titanium\screens\CinemaFullscreenContent.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\default\screens\CinemaComingSoonBluRay.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Titanium\screens\CinemaComingSoonBluRay.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Titanium\screens\CinemaComingSoonCinema.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Titanium\screens\CinemaHome.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Titanium\screens\CinemaCurrentlyPlaying.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaComingSoonBluRay.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaComingSoonCinema.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaCurrentlyPlaying.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaFullscreenContent.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skin\Reflexion\screens\CinemaHome.xaml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
