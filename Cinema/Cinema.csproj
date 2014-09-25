@@ -37,11 +37,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="FanArtService.Client">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\FanArtService.Client\FanArtService.Client.dll</HintPath>
+      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\FanArtService.Client\FanArtService.Client.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="GoogleMovies">
-      <HintPath>D:\MediaPortal-2-EXP_20140222\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\GoogleMovies.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>.\GoogleMovies.dll</HintPath>
     </Reference>
     <Reference Include="Media">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\Media\Media.dll</HintPath>
@@ -56,14 +56,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MediaPortal.Utilities">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.Utilities.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\MediaPortal.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Previewnetworks_v31">
-      <HintPath>D:\MediaPortal-2-EXP_20140222\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\Cinema\Previewnetworks_v31.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>.\Previewnetworks_v31.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerSettings.Client">
+      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\ServerSettings.Client\ServerSettings.Client.dll</HintPath>
     </Reference>
     <Reference Include="SkinEngine">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\SkinEngine\SkinEngine.dll</HintPath>
@@ -74,7 +75,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="VideoPlayers">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
+      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -107,9 +108,6 @@
     <Content Include="Language\strings_en.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="plugin - Kopieren.xml">
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="plugin.xml">
       <SubType>Designer</SubType>
@@ -241,6 +239,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MediaPortal-2\MediaPortal\Incubator\ServerSettings.Interfaces\ServerSettings.Interfaces.csproj">
+      <Project>{8E15FBE3-F6C8-4B76-A560-F391B4124E9C}</Project>
+      <Name>ServerSettings.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Language"
@@ -248,7 +252,9 @@ robocopy "$(ProjectDir)Language" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)
 mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin"
 robocopy "$(ProjectDir)Skin" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin" /MIR 
 xcopy /Y "$(ProjectDir)plugin.xml" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
-xcopy /Y "$(TargetPath)" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"</PostBuildEvent>
+xcopy /Y "$(TargetPath)" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
+xcopy /Y "$(ProjectDir)GoogleMovies.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
+xcopy /Y "$(ProjectDir)Previewnetworks_v31.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

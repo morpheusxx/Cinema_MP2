@@ -33,7 +33,6 @@ using MediaPortal.Common;
 using MediaPortal.Common.General;
 using MediaPortal.Common.Settings;
 using MediaPortal.UI.Presentation.Models;
-using MediaPortal.UI.Presentation.Screens;
 using MediaPortal.UI.Presentation.Workflow;
 using Movies = Cinema.Settings.Movies;
 
@@ -114,8 +113,6 @@ namespace Cinema.Dialoges
 
       var datalist = new Datalist { CinemaDataList = GoogleMovies.GoogleMovies.Data };
       ServiceRegistration.Get<ISettingsManager>().Save(datalist);
-
-      ServiceRegistration.Get<IScreenManager>().CloseTopmostDialog();
     }
 
     public static void GrappOtherInfos()

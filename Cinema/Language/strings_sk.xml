@@ -1,2 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources/>
+<resources>
+  <string name="Cinema.Title">Kino</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Miesta</string>
+  <string name="Cinema.Location.Settings.Helptext">Lokalizovať kiná</string>
+  <string name="Cinema.Location.Settings.Search">Hľadať</string>
+  <string name="Cinema.Settings">Nastavenie</string>
+  <string name="Cinema.LoadUpdate.Header">Načítanie informácií</string>
+  <string name="Cinema.LoadUpdate.Manually">Ručná aktualizácia</string>
+  <string name="Cinema.SelectQuality.Header">Vybrať kvalitu</string>
+  <string name="Cinema.SelectCinema">Vybrať kino</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Čoskoro v kinách</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Čoskoro na BluRay</string>
+  <string name="Cinema.Movieinfos.Trailer">Trailer</string>
+  <string name="Cinema.Movieinfos.Duration">Dľžka:</string>
+  <string name="Cinema.Movieinfos.AgeLimit">Vek:</string>
+  <string name="Cinema.Movieinfos.Actor">Herec</string>
+  <string name="Cinema.Movieinfos.Year">Rok:</string>
+  <string name="Cinema.Movieinfos.Genre">Žáner:</string>
+  <string name="Cinema.Movieinfos.Premiere">Premíera:</string>
+</resources>

@@ -20,14 +20,14 @@
       TargetState="6BE954F1-9ED7-4570-B565-1D7F7ADD1FAE"
       DisplayTitle="[Cinema.SelectCinema]"/>
 
-    <!--Manual Update-->
+    <!--Manual Update--><!--
     <MethodCallAction Id="CE2B51AE-374C-4EA1-987E-2BB3912E5E07"
       Name="Update"
       DisplayCategory="z-Cinema"
       DisplayTitle="[Cinema.LoadUpdate.Manually]"
       SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
       ModelId="78E0D999-D87A-4340-B8D1-9CF97814D2FD"
-      MethodName="MakeUpdate"/>   
+      MethodName="MakeUpdate"/>-->   
     
     <!--ComingSoon Cinema-->
     <PushNavigationTransition Id="18CCCE93-2C01-4587-80E7-F2329C694B03"
@@ -38,13 +38,13 @@
       TargetState="BF53FB1C-C846-48F2-BF1B-B848B7144102"
       DisplayTitle="[Cinema.Models.CinemaComingSoonCinema]"/>
 
-    <!--ComingSoon BluRay-->
+    <!--ComingSoon BluRay--><!--
     <PushNavigationTransition Id="E688CF8E-81EB-45D5-BF2D-E6A5A21CD10A"
       Name="Cinema->CinemaComingSoonBluRay"
       DisplayCategory="z-Cinema"
       SortOrder="a"
       SourceStates="5074508B-F6EE-4150-8FCD-7D8BD0A183F8"
       TargetState="64C1F471-8495-46D3-8DEC-2F07DAE5DD7E"
-      DisplayTitle="[Cinema.Models.CinemaComingSoonBluRay]"/>
+      DisplayTitle="[Cinema.Models.CinemaComingSoonBluRay]"/>-->
   </MenuActions>
 </Workflow>

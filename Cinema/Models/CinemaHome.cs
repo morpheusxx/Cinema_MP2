@@ -25,21 +25,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using Cinema.Dialoges;
 using Cinema.Player;
 using Cinema.Settings;
 using MediaPortal.Common;
 using MediaPortal.Common.General;
+using MediaPortal.Common.Logging;
+using MediaPortal.Common.PluginManager;
 using MediaPortal.Common.Settings;
 using MediaPortal.Extensions.UserServices.FanArtService.Client.Models;
 using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
+using MediaPortal.UI.Presentation.Screens;
 using MediaPortal.UI.Presentation.Workflow;
 using MediaPortal.UI.SkinEngine.Controls.ImageSources;
 
 namespace Cinema.Models
 {
-  public class CinemaHome : IWorkflowModel
+  public class CinemaHome : IWorkflowModel, IPluginStateTracker
   {
     #region Consts
 
@@ -49,6 +53,7 @@ namespace Cinema.Models
 
     #endregion
 
+    public static Timer ATimer = new Timer();
     public ItemsList Cinemas = new ItemsList();
     public static ItemsList Movies = new ItemsList();
 
@@ -145,10 +150,15 @@ namespace Cinema.Models
       }
     }
 
-    public static void MakeUpdate()
+    public static void MakeUpdate(bool dialog)
     {
-      ServiceRegistration.Get<IWorkflowManager>().NavigatePush(new Guid("48FE28A6-868D-4531-BF2F-1E746769B177"));
+      if (dialog)
+        ServiceRegistration.Get<IWorkflowManager>().NavigatePush(new Guid("48FE28A6-868D-4531-BF2F-1E746769B177"));
+
       DlgUpdate.MakeUpdate();
+
+      if (dialog)
+        ServiceRegistration.Get<IScreenManager>().CloseTopmostDialog();
     }
 
     #endregion
@@ -157,7 +167,7 @@ namespace Cinema.Models
 
     private static void Init()
     {
-      CkeckUpdate();
+      CkeckUpdate(true);
 
       if (GoogleMovies.GoogleMovies.Data.List != null && GoogleMovies.GoogleMovies.Data.List.Count > 0)
       {
@@ -165,18 +175,18 @@ namespace Cinema.Models
       }
     }
 
-    private static void CkeckUpdate()
+    private static void CkeckUpdate(bool dialog)
     {
       var dt1 = Convert.ToDateTime(SETTINGS_MANAGER.Load<Settings.CinemaSettings>().LastUpdate);
       var dt = DateTime.Now - dt1;
       // Is it a New Day ?
       if (dt > new TimeSpan(1, 0, 0, 0))
       {
-        MakeUpdate();
+        MakeUpdate(dialog);
       }
       else if (SETTINGS_MANAGER.Load<Locations>().Changed)
       {
-        MakeUpdate();
+        MakeUpdate(dialog);
       }
       else
       {
@@ -197,6 +207,12 @@ namespace Cinema.Models
       {
         fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
       }
+    }
+
+    private static void OnTimedEvent(object sender, ElapsedEventArgs e)
+    {
+      ServiceRegistration.Get<ILogger>().Info("Cinema Timer Thread Check Update");
+      CkeckUpdate(false);
     }
 
     #endregion
@@ -244,6 +260,40 @@ namespace Cinema.Models
     public ScreenUpdateMode UpdateScreen(NavigationContext context, ref string screen)
     {
       return ScreenUpdateMode.AutoWorkflowManager;
+    }
+
+    #endregion
+
+    # region IPluginStateTracker implementation
+
+    public void Activated(PluginRuntime pluginRuntime)
+    {
+      // Add Timer with event
+      ATimer.Elapsed += OnTimedEvent;
+      // Diff in sec To next Day 01.00.00
+      ATimer.Interval = DateTime.Today.AddHours(25).Subtract(DateTime.Now).TotalMilliseconds;
+      // Timer start
+      ATimer.Start();
+
+      // Make Update
+      CkeckUpdate(false);
+    }
+
+    public bool RequestEnd()
+    {
+      return true;
+    }
+
+    public void Stop()
+    {
+    }
+
+    public void Continue()
+    {
+    }
+
+    public void Shutdown()
+    {
     }
 
     #endregion

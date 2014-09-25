@@ -4,11 +4,13 @@
   PluginId="{6C74404D-5D4E-4774-A368-01911886B7EC}"
   Author="BigGranu"
   Copyright="GPL"
+  AutoActivate="true"
   Description="Cinemaprogramm, Trailer, Infos"
-  PluginVersion="1.0">
+  PluginVersion="1.1">
 
   <Runtime>
     <Assembly FileName="Cinema.dll"/>
+    <PluginStateTracker ClassName="Cinema.Models.CinemaHome"/>
   </Runtime>
 
 	<DependsOn>

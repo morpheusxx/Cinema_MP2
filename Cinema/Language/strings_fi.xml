@@ -1,7 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="Cinema.Title">Elokuva</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Sijainnit</string>
   <string name="Cinema.Location.Settings.Search">Etsi</string>
   <string name="Cinema.Settings">Asetukset</string>
   <string name="Cinema.LoadUpdate.Header">Lataa tiedot</string>
   <string name="Cinema.LoadUpdate.Manually">Päivitä manuaalisesti</string>
+  <string name="Cinema.SelectQuality.Header">Valitse laatu</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Tulee pian elokuvaan</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Tulee pian BluRaylle</string>
+  <string name="Cinema.Movieinfos.Trailer">Traileri</string>
+  <string name="Cinema.Movieinfos.Duration">Kesto:</string>
+  <string name="Cinema.Movieinfos.AgeLimit">Ikärajoitus:</string>
+  <string name="Cinema.Movieinfos.Actor">Näyttelijä</string>
+  <string name="Cinema.Movieinfos.Year">Vuosi:</string>
+  <string name="Cinema.Movieinfos.Genre">Tyylilaji:</string>
+  <string name="Cinema.Movieinfos.Premiere">Ensi-ilta:</string>
 </resources>

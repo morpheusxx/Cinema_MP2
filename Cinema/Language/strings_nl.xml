@@ -1,2 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources/>
+<resources>
+  <string name="Cinema.Title">Bioscoop</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">locaties</string>
+  <string name="Cinema.Location.Settings.Helptext">Zet de locaties van uw Bioscopen</string>
+  <string name="Cinema.Location.Settings.Search">zoek</string>
+  <string name="Cinema.Settings">instellingen</string>
+  <string name="Cinema.LoadUpdate.Header">laad informaties</string>
+  <string name="Cinema.LoadUpdate.Manually">update handmatig</string>
+  <string name="Cinema.SelectQuality.Header">kies de kwaliteit</string>
+  <string name="Cinema.SelectCinema">kies de bioscoop</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Binnenkort in de bioscoop</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">binnenkort op BluRay</string>
+  <string name="Cinema.Movieinfos.Trailer">Trailer</string>
+  <string name="Cinema.Movieinfos.Duration">Speelduur: </string>
+  <string name="Cinema.Movieinfos.AgeLimit">lijftijds limiet</string>
+  <string name="Cinema.Movieinfos.Actor">acteur</string>
+  <string name="Cinema.Movieinfos.Year">jaar</string>
+  <string name="Cinema.Movieinfos.Genre">Genre:</string>
+  <string name="Cinema.Movieinfos.Premiere">Premiere:</string>
+</resources>

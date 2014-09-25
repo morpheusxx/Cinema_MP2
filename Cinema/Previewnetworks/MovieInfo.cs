@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cinema.Helper;
-using MediaPortal.Common;
-using MediaPortal.Common.Localization;
-using MediaPortal.Common.Settings;
 using Previewnetworks_v31;
 
 namespace Cinema.Previewnetworks

@@ -1,2 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources/>
+<resources>
+  <string name="Cinema.Title">Kino</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">Orte</string>
+  <string name="Cinema.Location.Settings.Helptext">Gebe die Orte deiner Kinos ein</string>
+  <string name="Cinema.Location.Settings.Search">Suchen</string>
+  <string name="Cinema.Settings">Einstellungen</string>
+  <string name="Cinema.LoadUpdate.Header">Lade Informationen</string>
+  <string name="Cinema.LoadUpdate.Manually">Manuelles Update</string>
+  <string name="Cinema.SelectQuality.Header">Wähle eine Qualität</string>
+  <string name="Cinema.SelectCinema">Wähle ein Kino</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">Demnächst im Kino</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">Demnächst auf BluRay</string>
+  <string name="Cinema.Movieinfos.Trailer">Trailer</string>
+  <string name="Cinema.Movieinfos.Duration">Dauer:</string>
+  <string name="Cinema.Movieinfos.AgeLimit">FSK:</string>
+  <string name="Cinema.Movieinfos.Actor">Darsteller</string>
+  <string name="Cinema.Movieinfos.Year">Jahr:</string>
+  <string name="Cinema.Movieinfos.Genre">Genre:</string>
+  <string name="Cinema.Movieinfos.Premiere">Premiere:</string>
+</resources>
