@@ -80,9 +80,9 @@
 
           <!--List of Movies-->
           <ListView x:Name="Movies" Margin="15,5,15,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource MainMenuListViewStyle}"
-            ItemsSource="{Binding Path=Movies, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"
-            SelectionChanged="{CommandStencil Path=SetSelectedItem}">
-            <ListView.Resources>
+            ItemsSource="{Binding Path=Movies, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
+              <!--<EventSetter Event="SelectionChanged" Handler="{CommandStencil Source={StaticResource Model}, Path=SetSelectedItem}"/>-->
+              <ListView.Resources>
               <CommandList x:Key="Menu_Command">
                 <Command Source="{StaticResource Model}" Path="SelectMovie">
                   <Command.Parameters>

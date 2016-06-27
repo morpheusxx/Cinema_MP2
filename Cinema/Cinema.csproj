@@ -36,12 +36,14 @@
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\DirectShowWrapper.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FanArtService.Client">
-      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\FanArtService.Client\FanArtService.Client.dll</HintPath>
+    <Reference Include="FanArtService.Client, Version=2.0.0.1510, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\FanArtService.Client\FanArtService.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="GoogleMovies">
-      <HintPath>.\GoogleMovies.dll</HintPath>
+    <Reference Include="GoogleMovies, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\GoogleMovies.dll</HintPath>
     </Reference>
     <Reference Include="Media">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\Media\Media.dll</HintPath>
@@ -55,16 +57,29 @@
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MediaPortal.Utilities">
-      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\MediaPortal.Utilities.dll</HintPath>
+    <Reference Include="MediaPortal.Utilities, Version=2.0.0.1510, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\MediaPortal.Utilities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MusicApiCollection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>C:\Users\Knecht\Source\Repos\MediaPortal-2\MediaPortal\Packages\MusicApiCollection.0.1.0\lib\net451\MusicApiCollection.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Previewnetworks_v31">
-      <HintPath>.\Previewnetworks_v31.dll</HintPath>
+    <Reference Include="Previewnetworks">
+      <HintPath>libs\Previewnetworks.dll</HintPath>
     </Reference>
-    <Reference Include="ServerSettings.Client">
-      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\ServerSettings.Client\ServerSettings.Client.dll</HintPath>
+    <Reference Include="ServerSettings.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\ServerSettings.Client\ServerSettings.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ServerSettings.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\ServerSettings.Client\ServerSettings.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SkinEngine">
       <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\SkinEngine\SkinEngine.dll</HintPath>
@@ -74,8 +89,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="VideoPlayers">
-      <HintPath>..\..\MediaPortal-2\MediaPortal\Bin\MP2-Client\bin\x86\Debug\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
+    <Reference Include="VideoPlayers, Version=2.0.0.1510, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Team MediaPortal\MP2-Client\Plugins\VideoPlayers\VideoPlayers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -83,7 +99,6 @@
   <ItemGroup>
     <Compile Include="Dialoges\DlgSelectCinema.cs" />
     <Compile Include="Dialoges\DlgSelectContentLanguage.cs" />
-    <Compile Include="Dialoges\DlgSelectQuality.cs" />
     <Compile Include="Dialoges\DlgUpdate.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\GrappedMovie.cs" />
@@ -92,7 +107,6 @@
     <Compile Include="Models\CinemaComingSoonCinema.cs" />
     <Compile Include="Models\CinemaHome.cs" />
     <Compile Include="Models\CinemaSettings.cs" />
-    <Compile Include="Models\CinemaTrailerSearch.cs" />
     <Compile Include="Player\CinemaPlayer.cs" />
     <Compile Include="Player\CinemaPlayerHelper.cs" />
     <Compile Include="Player\CinemaUIContributor.cs" />
@@ -107,6 +121,12 @@
   <ItemGroup>
     <Content Include="Language\strings_en.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libs\GoogleMovies.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libs\Previewnetworks.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="plugin.xml">
@@ -240,11 +260,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MediaPortal-2\MediaPortal\Incubator\ServerSettings.Interfaces\ServerSettings.Interfaces.csproj">
-      <Project>{8E15FBE3-F6C8-4B76-A560-F391B4124E9C}</Project>
-      <Name>ServerSettings.Interfaces</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Language"
@@ -253,8 +271,9 @@ mkdir "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin
 robocopy "$(ProjectDir)Skin" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\Skin" /MIR 
 xcopy /Y "$(ProjectDir)plugin.xml" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
 xcopy /Y "$(TargetPath)" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
-xcopy /Y "$(ProjectDir)GoogleMovies.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
-xcopy /Y "$(ProjectDir)Previewnetworks_v31.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"</PostBuildEvent>
+xcopy /Y "$(TargetDir)GoogleMovies.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
+xcopy /Y "$(TargetDir)Previewnetworks.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"
+xcopy /Y "$(TargetDir)MusicApiCollection.dll" "$(SolutionDir)..\Bin\$(SolutionName)\$(OutDir)Plugins\$(ProjectName)\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

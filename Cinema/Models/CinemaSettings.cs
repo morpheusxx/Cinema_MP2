@@ -197,6 +197,11 @@ namespace Cinema.Models
       _lSettings.LocationSetupList = _selectedCinemas;
       _lSettings.Changed = b;
       ServiceRegistration.Get<ISettingsManager>().Save(_lSettings);
+
+      // Fix the Datebug
+      Settings.CinemaSettings _settings = new Settings.CinemaSettings();
+      _settings.LastUpdate = DateTime.Today;
+      ServiceRegistration.Get<ISettingsManager>().Save(_settings);
     }
 
     public void ChangeModelContext(NavigationContext oldContext, NavigationContext newContext, bool push)

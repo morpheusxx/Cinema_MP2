@@ -35,152 +35,148 @@ using MediaPortal.UI.Presentation.DataObjects;
 using MediaPortal.UI.Presentation.Models;
 using MediaPortal.UI.Presentation.Workflow;
 using MediaPortal.UI.SkinEngine.Controls.ImageSources;
-using Previewnetworks_v31;
+using Previewnetworks;
 
 namespace Cinema.Models
 {
-  public class CinemaComingSoonBluRay :IWorkflowModel
-  {
-    #region Consts
-
-    public const string MODEL_ID_STR = "50AD907D-32F2-4633-B017-E9BFC6B6C960";
-    public const string NAME = "name";
-    public const string TRAILER = "trailer";
-
-    #endregion
-
-    #region Propertys
-
-    private static AbstractProperty _infoProperty = new WProperty(typeof(string), string.Empty);
-
-    public AbstractProperty InfoProperty
+    public class CinemaComingSoonBluRay : IWorkflowModel
     {
-      get { return _infoProperty; }
-    }
+        public static ItemsList Items = new ItemsList();
 
-    public static string Info
-    {
-      get { return (string)_infoProperty.GetValue(); }
-      set { _infoProperty.SetValue(value); }
-    }
+        #region Consts
 
-    #endregion
+        public const string MODEL_ID_STR = "50AD907D-32F2-4633-B017-E9BFC6B6C960";
+        public const string NAME = "name";
+        public const string TRAILER = "trailer";
 
-    public static ItemsList Items = new ItemsList();
+        #endregion
 
-    #region public Methods
+        #region Propertys
 
-    public static void SelectMovie(ListItem item)
-    {
-      var t = new Trailer { Title = (string)item.AdditionalProperties[NAME], Url = (string)item.AdditionalProperties[TRAILER] };
-      if (t.Url != "")
-      {
-        CinemaPlayerHelper.PlayStream(t);
-      }
-    }
+        private static readonly AbstractProperty _infoProperty = new WProperty(typeof(string), string.Empty);
 
-    public void SetSelectedItem(ListItem selectedItem)
-    {
-      if (selectedItem != null)
-      {
-        var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
-        if (fanArtBgModel != null)
+        public AbstractProperty InfoProperty => _infoProperty;
+
+        public static string Info
         {
-          string uriSource = selectedItem.Labels["Picture"].ToString();
-
-          if (uriSource != "") fanArtBgModel.ImageSource = new MultiImageSource { UriSource = uriSource };
-          else fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
+            get { return (string)_infoProperty.GetValue(); }
+            set { _infoProperty.SetValue(value); }
         }
-      }
+
+        #endregion
+
+        #region public Methods
+
+        public static void SelectMovie(ListItem item)
+        {
+            var t = new Trailer { Title = (string)item.AdditionalProperties[NAME], Url = (string)item.AdditionalProperties[TRAILER] };
+            if (t.Url != "")
+            {
+                CinemaPlayerHelper.PlayStream(t);
+            }
+        }
+
+        public void SetSelectedItem(ListItem selectedItem)
+        {
+            if (selectedItem != null)
+            {
+                var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
+                if (fanArtBgModel != null)
+                {
+                    var uriSource = selectedItem.Labels["Picture"].ToString();
+
+                    if (uriSource != "") fanArtBgModel.ImageSource = new MultiImageSource { UriSource = uriSource };
+                    else fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
+                }
+            }
+        }
+
+        #endregion
+
+        #region private Methods
+
+        private void Init()
+        {
+            MovieInfo.Movies = new List<SortedMovie>();
+            MovieInfo.Movies = Search.CommingSoon(Functions.DefaultCountry(), Search.Feed.BluRay, Search.Typ.coming, 20);
+            FillItems();
+        }
+
+        private static void FillItems()
+        {
+            Items.Clear();
+            foreach (var movie in MovieInfo.Movies)
+            {
+                var item = new ListItem { AdditionalProperties = { [NAME] = movie.Title } };
+                item.SetLabel("Name", movie.Title);
+                item.SetLabel("Poster", movie.Cover);
+                item.SetLabel("Picture", movie.Picture);
+                item.SetLabel("Description", movie.Description);
+                item.SetLabel("Year", movie.Year);
+                item.SetLabel("AgeLimit", movie.AgeLimit);
+                item.SetLabel("Genre", movie.Genre);
+                item.AdditionalProperties[TRAILER] = movie.Trailer;
+                item.SetLabel("Duration", movie.Duration);
+                item.SetLabel("Premiere", movie.Premiere);
+                Items.Add(item);
+            }
+            Items.FireChange();
+        }
+
+        private void ClearFanart()
+        {
+            var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
+            if (fanArtBgModel != null)
+            {
+                fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
+            }
+        }
+
+        #endregion
+
+        #region IWorkflowModel implementation
+
+        public Guid ModelId
+        {
+            get { return new Guid(MODEL_ID_STR); }
+        }
+
+        public bool CanEnterState(NavigationContext oldContext, NavigationContext newContext)
+        {
+            return true;
+        }
+
+        public void EnterModelContext(NavigationContext oldContext, NavigationContext newContext)
+        {
+            Init();
+        }
+
+        public void ExitModelContext(NavigationContext oldContext, NavigationContext newContext)
+        {
+            ClearFanart();
+        }
+
+        public void ChangeModelContext(NavigationContext oldContext, NavigationContext newContext, bool push)
+        {
+        }
+
+        public void Deactivate(NavigationContext oldContext, NavigationContext newContext)
+        {
+        }
+
+        public void Reactivate(NavigationContext oldContext, NavigationContext newContext)
+        {
+        }
+
+        public void UpdateMenuActions(NavigationContext context, IDictionary<Guid, WorkflowAction> actions)
+        {
+        }
+
+        public ScreenUpdateMode UpdateScreen(NavigationContext context, ref string screen)
+        {
+            return ScreenUpdateMode.AutoWorkflowManager;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region private Methods
-
-    private void Init()
-    {
-      MovieInfo.Movies = new List<Movie>();
-      MovieInfo.Movies = Search.Info(Functions.DefaultCountry(), Search.Feed.BluRay, Search.Typ.coming, 20);
-      FillItems();
-    }
-
-    private static void FillItems()
-    {
-      Items.Clear();
-      for (int x = 0; x <= MovieInfo.Movies.Count - 1; x++)
-      {
-        var item = new ListItem();
-        item.AdditionalProperties[NAME] = MovieInfo.Movies[x].Regions[0].products[0].product_title;
-        item.SetLabel("Name", MovieInfo.Movies[x].Regions[0].products[0].product_title);
-        item.SetLabel("Poster", MovieInfo.Poster(x));
-        item.SetLabel("Picture", MovieInfo.Picture(x));
-        item.SetLabel("Description", MovieInfo.Description(x));
-        item.SetLabel("Year", MovieInfo.Year(x));
-        item.SetLabel("AgeLimit", MovieInfo.AgeLimit(x));
-        item.SetLabel("Genre", MovieInfo.Genres(x));
-        item.AdditionalProperties[TRAILER] = MovieInfo.Trailer("mp4 / xxlarge", x);
-        item.SetLabel("Duration", MovieInfo.Duration(x));
-        item.SetLabel("Premiere", MovieInfo.Premiere(x));
-        Items.Add(item);
-      }
-      Items.FireChange();
-    }
-
-    private void ClearFanart()
-    {
-      var fanArtBgModel = (FanArtBackgroundModel)ServiceRegistration.Get<IWorkflowManager>().GetModel(FanArtBackgroundModel.FANART_MODEL_ID);
-      if (fanArtBgModel != null)
-      {
-        fanArtBgModel.ImageSource = new MultiImageSource { UriSource = null };
-      }
-    }
-
-    #endregion
-
-    #region IWorkflowModel implementation
-
-    public Guid ModelId
-    {
-      get { return new Guid(MODEL_ID_STR); }
-    }
-
-    public bool CanEnterState(NavigationContext oldContext, NavigationContext newContext)
-    {
-      return true;
-    }
-
-    public void EnterModelContext(NavigationContext oldContext, NavigationContext newContext)
-    {
-      Init();
-    }
-
-    public void ExitModelContext(NavigationContext oldContext, NavigationContext newContext)
-    {
-      ClearFanart();
-    }
-
-    public void ChangeModelContext(NavigationContext oldContext, NavigationContext newContext, bool push)
-    {
-    }
-
-    public void Deactivate(NavigationContext oldContext, NavigationContext newContext)
-    {
-    }
-
-    public void Reactivate(NavigationContext oldContext, NavigationContext newContext)
-    {
-    }
-
-    public void UpdateMenuActions(NavigationContext context, IDictionary<Guid, WorkflowAction> actions)
-    {
-    }
-
-    public ScreenUpdateMode UpdateScreen(NavigationContext context, ref string screen)
-    {
-      return ScreenUpdateMode.AutoWorkflowManager;
-    }
-
-    #endregion
-  }
 }

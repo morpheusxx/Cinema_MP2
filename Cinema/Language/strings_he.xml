@@ -1,2 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources/>
+<resources>
+  <string name="Cinema.Title">קולנוע</string>
+  <string name="Cinema.Location.Settings.ScreenTitle">מיקומים</string>
+  <string name="Cinema.Location.Settings.Helptext">הכנס את מיקומי הקולנוע באזורך</string>
+  <string name="Cinema.Location.Settings.Search">חפש</string>
+  <string name="Cinema.Settings">הגדרות</string>
+  <string name="Cinema.LoadUpdate.Header">טען מידע</string>
+  <string name="Cinema.LoadUpdate.Manually">עדכון ידני</string>
+  <string name="Cinema.SelectQuality.Header">בחר איכות</string>
+  <string name="Cinema.SelectCinema">בחר קולנוע</string>
+  <string name="Cinema.Models.CinemaComingSoonCinema">בקרוב בבית הקולנוע</string>
+  <string name="Cinema.Models.CinemaComingSoonBluRay">בקרוב בבלו-ריי</string>
+  <string name="Cinema.Movieinfos.Trailer">קדימון</string>
+  <string name="Cinema.Movieinfos.Duration">אורך נגינה:</string>
+  <string name="Cinema.Movieinfos.AgeLimit">הגבלת גיל:</string>
+  <string name="Cinema.Movieinfos.Actor">שחקן</string>
+  <string name="Cinema.Movieinfos.Year">שנה:</string>
+  <string name="Cinema.Movieinfos.Genre">סגנון:</string>
+  <string name="Cinema.Movieinfos.Premiere">עלה לראשונה:</string>
+</resources>

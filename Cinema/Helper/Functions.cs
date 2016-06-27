@@ -24,7 +24,7 @@
 
 using MediaPortal.Common;
 using MediaPortal.Common.Localization;
-using Previewnetworks_v31;
+using Previewnetworks;
 
 namespace Cinema.Helper
 {
@@ -36,16 +36,16 @@ namespace Cinema.Helper
       var re = localization.CurrentCulture.Name;
 
       if (re.Contains("de-CH"))
-        return Search.Country.Switzerland_German;
+        return Search.Country.SwitzerlandGerman;
 
       if (re.Contains("fr-CH"))
-        return Search.Country.Switzerland_French;
+        return Search.Country.SwitzerlandFrench;
 
       if (re.Contains("de-"))
         return Search.Country.Germany;
 
       if (re.Contains("en-"))
-        return Search.Country.United_Kingdom;
+        return Search.Country.UnitedKingdom;
 
       if (re.Contains("fr-"))
         return Search.Country.France;

@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using GoogleMovies;
 using Cinema.Helper;
 using Cinema.Previewnetworks;
@@ -80,9 +81,28 @@ namespace Cinema.Dialoges
     private static Locations _locations = new Locations();
     private static CinemaSettings _settings = new CinemaSettings();
     private static Movies _movies = new Movies();
+    private static bool _updateIsRunning = false;
 
-    public static void MakeUpdate()
+    public static void MakeUpdate(bool extThread)
     {
+      if (_updateIsRunning)
+        return;
+
+      if (extThread)
+      {     
+        Update();
+      }
+      else
+      {
+        Thread newThread = new Thread(Update);
+        newThread.Start();
+      }
+    }
+
+    private static void Update()
+    {
+      _updateIsRunning = true;
+
       _settings = SETTINGS_MANAGER.Load<CinemaSettings>();
       _locations = SETTINGS_MANAGER.Load<Locations>();
 
@@ -105,14 +125,16 @@ namespace Cinema.Dialoges
         GrappOtherInfos();
       }
 
-      _settings.LastUpdate = DateTime.Now.ToString("dd.MM.yyyy");
+      _settings.LastUpdate = DateTime.Today;
       ServiceRegistration.Get<ISettingsManager>().Save(_settings);
-      
+
       _locations.Changed = false;
       ServiceRegistration.Get<ISettingsManager>().Save(_locations);
 
       var datalist = new Datalist { CinemaDataList = GoogleMovies.GoogleMovies.Data };
       ServiceRegistration.Get<ISettingsManager>().Save(datalist);
+
+      _updateIsRunning = false;
     }
 
     public static void GrappOtherInfos()
@@ -134,22 +156,19 @@ namespace Cinema.Dialoges
         Info = m.Title;
 
         var gm = new GrappedMovie();
-        var imdb = MovieInfo.ImdbID(m.Title);
+        var imdb = MovieInfo.GetImdbID(m.Title);
         gm.ImdbID = imdb;
         gm.Title = m.Title;
 
-        MovieInfo.GrappByImdb(imdb);
+        var mi = new MovieInfo(imdb);
 
-        if (MovieInfo.Movies.Count > 0)
-        {
-          gm.Poster = MovieInfo.Poster(0);
-          gm.Picture = MovieInfo.Picture(0);
-          gm.Description = MovieInfo.Description(0);
-          gm.Year = MovieInfo.Year(0);
-          gm.AgeLimit = MovieInfo.AgeLimit(0);
-          gm.Genre = MovieInfo.Genres(0);
-          gm.Trailer = MovieInfo.Trailer("mp4 / xxlarge", 0);
-        }
+        gm.Poster = mi.Poster;
+        gm.Picture = mi.Picture;
+        gm.Description = mi.Description;
+        gm.Year = mi.Year;
+        gm.AgeLimit = mi.AgeLimit;
+        gm.Genre = mi.Genre;
+        gm.Trailer = mi.Trailer;
 
         _movies.MovieList.Add(gm);
         UpdateProgress += percent;

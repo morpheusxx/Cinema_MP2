@@ -22,6 +22,7 @@
 
 #endregion
 
+using System;
 using MediaPortal.Common.Settings;
 
 namespace Cinema.Settings
@@ -45,6 +46,6 @@ namespace Cinema.Settings
     /// Date of Datalist
     /// </summary>
     [Setting(SettingScope.User, "07.02.2014")]
-    public string LastUpdate { get; set; }
+    public DateTime LastUpdate { get; set; }
   }
 }
