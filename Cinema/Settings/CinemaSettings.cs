@@ -45,7 +45,7 @@ namespace Cinema.Settings
     /// <summary>
     /// Date of Datalist
     /// </summary>
-    [Setting(SettingScope.User, "07.02.2014")]
-    public DateTime LastUpdate { get; set; }
+    [Setting(SettingScope.User)]
+    public DateTime? LastUpdate { get; set; }
   }
 }

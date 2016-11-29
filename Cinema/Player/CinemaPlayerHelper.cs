@@ -51,19 +51,19 @@ namespace Cinema.Player
     /// <param name="trailer">Trailer.</param>
     private static MediaItem CreateStreamMediaItem(Trailer trailer)
     {
-      IDictionary<Guid, MediaItemAspect> aspects = new Dictionary<Guid, MediaItemAspect>();
+      IDictionary<Guid, IList<MediaItemAspect>> aspects = new Dictionary<Guid, IList<MediaItemAspect>>();
 
-      MediaItemAspect providerResourceAspect;
-      aspects[ProviderResourceAspect.ASPECT_ID] = providerResourceAspect = new MediaItemAspect(ProviderResourceAspect.Metadata);
-      MediaItemAspect mediaAspect;
-      aspects[MediaAspect.ASPECT_ID] = mediaAspect = new MediaItemAspect(MediaAspect.Metadata);
-      aspects[VideoAspect.ASPECT_ID] = new MediaItemAspect(VideoAspect.Metadata); // VideoAspect needs to be contained for player mapping
+      MultipleMediaItemAspect providerResourceAspect = MediaItemAspect.CreateAspect(aspects, ProviderResourceAspect.Metadata);
+      providerResourceAspect.SetAttribute(ProviderResourceAspect.ATTR_PRIMARY, true);
+      providerResourceAspect.SetAttribute(ProviderResourceAspect.ATTR_SYSTEM_ID, ServiceRegistration.Get<ISystemResolver>().LocalSystemId);
+
+      MediaItemAspect.GetOrCreateAspect(aspects, VideoAspect.Metadata);
 
       providerResourceAspect.SetAttribute(ProviderResourceAspect.ATTR_RESOURCE_ACCESSOR_PATH, RawUrlResourceProvider.ToProviderResourcePath(trailer.Url).Serialize());
       providerResourceAspect.SetAttribute(ProviderResourceAspect.ATTR_SYSTEM_ID, ServiceRegistration.Get<ISystemResolver>().LocalSystemId);
+      providerResourceAspect.SetAttribute(ProviderResourceAspect.ATTR_MIME_TYPE, CINEMA_MIMETYPE);
 
-      mediaAspect.SetAttribute(MediaAspect.ATTR_MIME_TYPE, CINEMA_MIMETYPE);
-      mediaAspect.SetAttribute(MediaAspect.ATTR_TITLE, trailer.Title);
+      MediaItemAspect.SetAttribute(aspects, MediaAspect.ATTR_TITLE, trailer.Title);
 
       var mediaItem = new MediaItem(Guid.Empty, aspects);
       return mediaItem;

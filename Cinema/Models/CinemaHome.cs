@@ -179,7 +179,7 @@ namespace Cinema.Models
 
         private static void CkeckUpdate(bool dialog)
         {
-            var dt1 = Convert.ToDateTime(SETTINGS_MANAGER.Load<Settings.CinemaSettings>().LastUpdate);
+            var dt1 = SETTINGS_MANAGER.Load<Settings.CinemaSettings>().LastUpdate ?? DateTime.MinValue;
             var dt = DateTime.Now - dt1;
             // Is it a New Day ?
             if (dt > new TimeSpan(1, 0, 0, 0))
